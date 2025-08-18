@@ -66,7 +66,7 @@ export function DocsSidebar() {
                         className={cn(
                           'flex items-center gap-3 py-2 px-2 text-sm transition-colors rounded-md',
                           isActive
-                            ? 'bg-blue-50 text-blue-600 font-medium border-l-2 border-blue-600 pl-2'
+                            ? 'bg-blue-50 text-blue-600 font-medium border-l-2 pl-2'
                             : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                         )}
                         onClick={() => setIsOpen(false)}
