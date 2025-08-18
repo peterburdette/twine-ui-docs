@@ -30,7 +30,7 @@ export function Header() {
               <span className="text-sm font-bold">T</span>
             </div>
             <div>
-              <h1 className="text-lg font-semibold">TwineUI</h1>
+              <h1 className="text-lg font-semibold">Twine UI</h1>
               <p className="text-sm text-gray-500">Component Library</p>
             </div>
           </Link>
