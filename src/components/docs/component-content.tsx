@@ -138,7 +138,7 @@ export function ComponentContent({ data }: ComponentContentProps) {
         </Card>
       </section>
 
-      {/* Advanced Usage */}
+      {/* Advanced Usage - only show if advanced examples exist */}
       {data.examples.advanced && (
         <section
           id="advanced-usage"
@@ -153,7 +153,7 @@ export function ComponentContent({ data }: ComponentContentProps) {
                 Advanced {data.title.replace(' Component', '')}
               </CardTitle>
               <CardDescription>
-                The most advanced implementation
+                Advanced implementation with additional features
               </CardDescription>
             </CardHeader>
             <CardContent>
