@@ -8,6 +8,9 @@ import {
   Calendar,
   Clock,
   Table,
+  SquareCheck,
+  SquareChevronDown,
+  CircleDot,
 } from 'lucide-react';
 
 export interface NavigationItem {
@@ -39,7 +42,9 @@ export const navigationData: NavigationSection[] = [
     items: [
       { title: 'Button', href: '/button', icon: MousePointer },
       { title: 'Input', href: '/input', icon: Type },
-      { title: 'Select', href: '/select', icon: MousePointer },
+      { title: 'Checkbox', href: '/checkbox', icon: SquareCheck },
+      { title: 'Select', href: '/select', icon: SquareChevronDown },
+      { title: 'Radio', href: '/radio', icon: CircleDot },
       { title: 'Date Picker', href: '/datepicker', icon: Calendar },
       { title: 'Time Picker', href: '/timepicker', icon: Clock },
     ],

@@ -10,9 +10,8 @@ export const InputDemo = () => {
     <div className="space-y-4 max-w-md">
       <Input
         type="text"
-        placeholder="Type something..."
+        placeholder="Start typing..."
         value={value}
-        helperText="testing"
         onChange={(e) => setValue(e.target.value)}
       />
       {value && (

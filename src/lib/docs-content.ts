@@ -135,6 +135,88 @@ const inputData: ComponentData = {
   },
 };
 
+const selectData: ComponentData = {
+  title: 'Select Component',
+  description:
+    'A flexible select component with validation states and various types built with Tailwind CSS.',
+  version: 'v1.0.0',
+  tableOfContents: [
+    { id: 'overview', title: 'Overview', level: 1 },
+    { id: 'installation', title: 'Installation', level: 1 },
+    { id: 'basic-usage', title: 'Basic Usage', level: 1 },
+    { id: 'types', title: 'Input Types', level: 2 },
+    { id: 'validation', title: 'Validation States', level: 2 },
+    { id: 'api-reference', title: 'API Reference', level: 1 },
+    { id: 'accessibility', title: 'Accessibility', level: 1 },
+  ],
+  installCommand: 'npm install @your-org/twine-ui',
+  examples: {
+    basic: {
+      code: `
+      <Select
+        label="Countries"
+        options={[
+          { value: 'Algeria', label: 'Algeria' },
+          { value: 'England', label: 'England' },
+          { value: 'United States', label: 'United States' },
+        ]}
+      />
+      `,
+      previewComponent: 'SelectDemo',
+    },
+  },
+};
+
+const checkboxData: ComponentData = {
+  title: 'Checkbox Component',
+  description:
+    'A flexible checkbox component with validation states and various types built with Tailwind CSS.',
+  version: 'v1.0.0',
+  tableOfContents: [
+    { id: 'overview', title: 'Overview', level: 1 },
+    { id: 'installation', title: 'Installation', level: 1 },
+    { id: 'basic-usage', title: 'Basic Usage', level: 1 },
+    { id: 'types', title: 'Input Types', level: 2 },
+    { id: 'validation', title: 'Validation States', level: 2 },
+    { id: 'api-reference', title: 'API Reference', level: 1 },
+    { id: 'accessibility', title: 'Accessibility', level: 1 },
+  ],
+  installCommand: 'npm install @your-org/twine-ui',
+  examples: {
+    basic: {
+      code: `
+      <Checkbox />
+      `,
+      previewComponent: 'CheckboxDemo',
+    },
+  },
+};
+
+const radioData: ComponentData = {
+  title: 'Radio Component',
+  description:
+    'A flexible radio component with validation states and various types built with Tailwind CSS.',
+  version: 'v1.0.0',
+  tableOfContents: [
+    { id: 'overview', title: 'Overview', level: 1 },
+    { id: 'installation', title: 'Installation', level: 1 },
+    { id: 'basic-usage', title: 'Basic Usage', level: 1 },
+    { id: 'types', title: 'Input Types', level: 2 },
+    { id: 'validation', title: 'Validation States', level: 2 },
+    { id: 'api-reference', title: 'API Reference', level: 1 },
+    { id: 'accessibility', title: 'Accessibility', level: 1 },
+  ],
+  installCommand: 'npm install @your-org/twine-ui',
+  examples: {
+    basic: {
+      code: `
+      <Radio />
+      `,
+      previewComponent: 'RadioDemo',
+    },
+  },
+};
+
 const datagridData: ComponentData = {
   title: 'Data Grid Component',
   description:
@@ -179,6 +261,9 @@ const datagridData: ComponentData = {
 const componentDataMap: Record<string, ComponentData> = {
   button: buttonData,
   input: inputData,
+  checkbox: checkboxData,
+  select: selectData,
+  radio: radioData,
   datagrid: datagridData,
   card: {
     title: 'Card Component',

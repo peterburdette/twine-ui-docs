@@ -3,11 +3,15 @@ import { CardDemo } from '../demos/Card';
 import { BasicDataGridDemo } from '../demos/DataGrid/BasicDataGridDemo';
 import { AdvancedDataGridDemo } from '../demos/DataGrid/AdvancedDataGridDemo';
 import { InputDemo } from '../demos/Input';
+import { SelectDemo } from '../demos/Select';
+import { CheckboxDemo } from '../demos/Checkbox';
 
 // Registry of all preview components - removed DialogDemo to prevent import errors
 export const previewComponents = {
   ButtonDemo,
   InputDemo,
+  SelectDemo,
+  CheckboxDemo,
   BasicDataGridDemo,
   AdvancedDataGridDemo,
   CardDemo,
