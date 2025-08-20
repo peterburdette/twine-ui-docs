@@ -28,7 +28,7 @@ export function Footer() {
           </div>
           <div className="flex flex-col items-center gap-2 md:items-end">
             <p className="text-center text-sm text-gray-500 md:text-right">
-              © 2024 Twine UI Components. All rights reserved.
+              © 2024 Twine UI. All rights reserved.
             </p>
           </div>
         </div>

@@ -34,7 +34,7 @@ export function OverviewContent() {
         <div className="space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center gap-2">
             <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">
-              Twine UI Components
+              Twine UI
             </h1>
             <Badge variant="secondary">v1.0.0</Badge>
           </div>

@@ -6,7 +6,7 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Twine UI Components',
+  title: 'Twine UI',
   description: 'A comprehensive collection of Tailwind CSS components',
 };
 
