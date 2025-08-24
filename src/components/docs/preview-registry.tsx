@@ -5,13 +5,15 @@ import { AdvancedDataGridDemo } from '../demos/DataGrid/AdvancedDataGridDemo';
 import { InputDemo } from '../demos/Input';
 import { SelectDemo } from '../demos/Select';
 import { CheckboxDemo } from '../demos/Checkbox';
+import { RadioDemo } from '../demos/Radio';
 
-// Registry of all preview components - removed DialogDemo to prevent import errors
+// Registry of all preview components
 export const previewComponents = {
   ButtonDemo,
   InputDemo,
   SelectDemo,
   CheckboxDemo,
+  RadioDemo,
   BasicDataGridDemo,
   AdvancedDataGridDemo,
   CardDemo,
