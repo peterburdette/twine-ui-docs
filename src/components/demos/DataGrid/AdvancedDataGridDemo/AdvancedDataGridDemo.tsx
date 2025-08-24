@@ -17,151 +17,118 @@ export const AdvancedDataGridDemo = () => {
   const [hideFilters, setHideFilters] = useState(false);
   const [hideExport, setHideExport] = useState(false);
   const [hideManageColumns, setHideManageColumns] = useState(false);
-  const [hideRowsPerPage, sethideRowsPerPage] = useState(false);
-
-  const handleShowCheckboxColumnSelectionChange = () => {
-    setShowCheckboxColumnSelection(!showCheckboxColumnSelection);
-  };
-
-  const handleEnableColumnReorder = () => {
-    setEnableColumnReorder(!enableColumnReorder);
-  };
-
-  const handleEnableColumnFilters = () => {
-    setEnableColumnFilters(!enableColumnFilters);
-  };
-
-  const handleHideToolbar = () => {
-    setHideToolbar(!hideToolbar);
-  };
-
-  const handleHideFooter = () => {
-    setHideFooter(!hideFooter);
-  };
-
-  const handleHideSearch = () => {
-    setHideSearch(!hideSearch);
-  };
-
-  const handleHideFilters = () => {
-    setHideFilters(!hideFilters);
-  };
-
-  const handleHideExport = () => {
-    setHideExport(!hideExport);
-  };
-
-  const handleHideManageColumns = () => {
-    setHideManageColumns(!hideManageColumns);
-  };
-
-  const handleHideRowsPerPage = () => {
-    sethideRowsPerPage(!hideRowsPerPage);
-  };
+  const [hideRowsPerPage, setHideRowsPerPage] = useState(false);
+  const [hideGridLines, setHideGridLines] = useState(false);
+  const [hideLabels, setHideLabels] = useState(false);
 
   return (
-    <>
-      <div>
-        <div className="flex flex-col w-64 flex-1">
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={showCheckboxColumnSelection}
-                onChange={handleShowCheckboxColumnSelectionChange}
-              />
+    <div className="flex flex-col w-64 flex-1">
+      {/* Options grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1 mb-10">
+        <FormControlLabel
+          label={`${
+            showCheckboxColumnSelection ? 'Hide' : 'Show'
+          } Checkbox Column`}
+        >
+          <Checkbox
+            checked={showCheckboxColumnSelection}
+            onChange={() =>
+              setShowCheckboxColumnSelection(!showCheckboxColumnSelection)
             }
-            label={`${
-              showCheckboxColumnSelection ? 'Hide' : 'Show'
-            } Checkbox Column`}
           />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={enableColumnReorder}
-                onChange={handleEnableColumnReorder}
-              />
-            }
-            label={`${
-              enableColumnReorder ? 'Disable' : 'Enable'
-            } Column Reorder`}
+        </FormControlLabel>
+
+        <FormControlLabel
+          label={`${enableColumnReorder ? 'Disable' : 'Enable'} Column Reorder`}
+        >
+          <Checkbox
+            checked={enableColumnReorder}
+            onChange={() => setEnableColumnReorder(!enableColumnReorder)}
           />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={enableColumnFilters}
-                onChange={handleEnableColumnFilters}
-              />
-            }
-            label={`${
-              enableColumnFilters ? 'Disable' : 'Enable'
-            } Column Filters`}
+        </FormControlLabel>
+
+        <FormControlLabel
+          label={`${enableColumnFilters ? 'Disable' : 'Enable'} Column Filters`}
+        >
+          <Checkbox
+            checked={enableColumnFilters}
+            onChange={() => setEnableColumnFilters(!enableColumnFilters)}
           />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={hideToolbar}
-                onChange={handleHideToolbar}
-              />
-            }
-            label={`${hideToolbar ? 'Show' : 'Hide'} Toolbar`}
+        </FormControlLabel>
+
+        <FormControlLabel label={`${hideToolbar ? 'Show' : 'Hide'} Toolbar`}>
+          <Checkbox
+            checked={hideToolbar}
+            onChange={() => setHideToolbar(!hideToolbar)}
           />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={hideFooter}
-                onChange={handleHideFooter}
-              />
-            }
-            label={`${hideFooter ? 'Show' : 'Hide'} Footer`}
+        </FormControlLabel>
+
+        <FormControlLabel label={`${hideFooter ? 'Show' : 'Hide'} Footer`}>
+          <Checkbox
+            checked={hideFooter}
+            onChange={() => setHideFooter(!hideFooter)}
           />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={hideSearch}
-                onChange={handleHideSearch}
-              />
-            }
-            label={`${hideSearch ? 'Show' : 'Hide'} Search`}
+        </FormControlLabel>
+
+        <FormControlLabel label={`${hideSearch ? 'Show' : 'Hide'} Search`}>
+          <Checkbox
+            checked={hideSearch}
+            onChange={() => setHideSearch(!hideSearch)}
           />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={hideFilters}
-                onChange={handleHideFilters}
-              />
-            }
-            label={`${hideFilters ? 'Show' : 'Hide'} Filters`}
+        </FormControlLabel>
+
+        <FormControlLabel label={`${hideFilters ? 'Show' : 'Hide'} Filters`}>
+          <Checkbox
+            checked={hideFilters}
+            onChange={() => setHideFilters(!hideFilters)}
           />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={hideExport}
-                onChange={handleHideExport}
-              />
-            }
-            label={`${hideExport ? 'Show' : 'Hide'} Export`}
+        </FormControlLabel>
+
+        <FormControlLabel label={`${hideExport ? 'Show' : 'Hide'} Export`}>
+          <Checkbox
+            checked={hideExport}
+            onChange={() => setHideExport(!hideExport)}
           />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={hideManageColumns}
-                onChange={handleHideManageColumns}
-              />
-            }
-            label={`${hideManageColumns ? 'Show' : 'Hide'} Manage Columns`}
+        </FormControlLabel>
+
+        <FormControlLabel
+          label={`${hideManageColumns ? 'Show' : 'Hide'} Manage Columns`}
+        >
+          <Checkbox
+            checked={hideManageColumns}
+            onChange={() => setHideManageColumns(!hideManageColumns)}
           />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={hideRowsPerPage}
-                onChange={handleHideRowsPerPage}
-              />
-            }
-            label={`${hideRowsPerPage ? 'Show' : 'Hide'} Rows Per Page`}
+        </FormControlLabel>
+
+        <FormControlLabel
+          label={`${hideRowsPerPage ? 'Show' : 'Hide'} Rows Per Page`}
+        >
+          <Checkbox
+            checked={hideRowsPerPage}
+            onChange={() => setHideRowsPerPage(!hideRowsPerPage)}
           />
-        </div>
+        </FormControlLabel>
+
+        <FormControlLabel
+          label={`${hideGridLines ? 'Show' : 'Hide'} Grid Lines`}
+        >
+          <Checkbox
+            checked={hideGridLines}
+            onChange={() => setHideGridLines(!hideGridLines)}
+          />
+        </FormControlLabel>
+
+        <FormControlLabel
+          label={`${hideLabels ? 'Show' : 'Hide'} Button Labels`}
+        >
+          <Checkbox
+            checked={hideLabels}
+            onChange={() => setHideLabels(!hideLabels)}
+          />
+        </FormControlLabel>
       </div>
 
+      {/* DataGrid */}
       <div className="border border-gray-200 rounded-lg overflow-hidden">
         <DataGrid
           rows={demoData}
@@ -176,11 +143,13 @@ export const AdvancedDataGridDemo = () => {
           hideExport={hideExport}
           hideColumns={hideManageColumns}
           hideRowsPerPage={hideRowsPerPage}
-          hideFilterLabel
-          hideExportLabel
-          hideColumnsLabel
+          hideFilterLabel={hideLabels}
+          hideExportLabel={hideLabels}
+          hideColumnsLabel={hideLabels}
+          hideGridLines={hideGridLines}
+          pageSize={5}
         />
       </div>
-    </>
+    </div>
   );
 };
