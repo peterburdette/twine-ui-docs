@@ -40,13 +40,15 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
           {title && (
             <h2
               id={headingId}
-              className="text-lg font-semibold scroll-mt-32"
+              className="text-2xl font-semibold scroll-mt-32"
             >
               {title}
             </h2>
           )}
           {description && (
-            <p className="mt-1 text-sm text-muted-foreground">{description}</p>
+            <p className="mt-1 text-md text-gray-600 text-muted-foreground">
+              {description}
+            </p>
           )}
         </header>
       )}

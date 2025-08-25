@@ -45,7 +45,7 @@ const DocsLayout = ({
                     </h1>
                   )}
                   {description && (
-                    <p className="text-lg sm:text-xl text-gray-600">
+                    <p className="text-md sm:text-md text-gray-600">
                       {description}
                     </p>
                   )}
