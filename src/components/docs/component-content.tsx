@@ -138,75 +138,76 @@ export function ComponentContent({ data }: ComponentContentProps) {
         </Card>
       </section>
 
-      {/* Advanced Usage - only show if advanced examples exist */}
-      {data.examples.advanced && (
+      {/* Variants - only show if variants exist */}
+      {data.examples.variants?.length ? (
         <section
-          id="advanced-usage"
+          id="variants"
           className="scroll-mt-32 space-y-4"
         >
           <h2 className="text-xl sm:text-2xl font-semibold border-b border-gray-200 pb-2 text-gray-900">
-            Advanced Usage
+            Variants
           </h2>
-          <Card>
-            <CardHeader>
-              <CardTitle>
-                Advanced {data.title.replace(' Component', '')}
-              </CardTitle>
-              <CardDescription>
-                Advanced implementation with additional features
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Tabs
-                defaultValue="preview"
-                className="w-full"
-              >
-                <TabsList>
-                  <TabsTrigger value="preview">Preview</TabsTrigger>
-                  <TabsTrigger value="code">Code</TabsTrigger>
-                </TabsList>
-                <TabsContent
-                  value="preview"
-                  className="mt-4"
-                >
-                  <div className="border border-gray-200 rounded-lg p-6 bg-white">
-                    <ComponentPreview
-                      componentName={data.examples.advanced.previewComponent}
-                    />
-                  </div>
-                </TabsContent>
-                <TabsContent
-                  value="code"
-                  className="mt-4"
-                >
-                  <div className="relative">
-                    <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto text-sm border">
-                      <code className="text-gray-800">
-                        {data.examples.advanced.code}
-                      </code>
-                    </pre>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      className="absolute top-2 right-2"
-                      onClick={() =>
-                        data.examples.advanced &&
-                        copyToClipboard(data.examples.advanced.code, 'advanced')
-                      }
+
+          {data.examples.variants.map((variant, i) => {
+            const copyId = `variant-${i}`;
+            return (
+              <Card key={i}>
+                <CardHeader>
+                  <CardTitle>Variant {i + 1}</CardTitle>
+                  <CardDescription>
+                    Example variant configuration
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Tabs
+                    defaultValue="preview"
+                    className="w-full"
+                  >
+                    <TabsList>
+                      <TabsTrigger value="preview">Preview</TabsTrigger>
+                      <TabsTrigger value="code">Code</TabsTrigger>
+                    </TabsList>
+
+                    <TabsContent
+                      value="preview"
+                      className="mt-4"
                     >
-                      {copiedCode === 'advanced' ? (
-                        <Check className="h-4 w-4" />
-                      ) : (
-                        <Copy className="h-4 w-4" />
-                      )}
-                    </Button>
-                  </div>
-                </TabsContent>
-              </Tabs>
-            </CardContent>
-          </Card>
+                      <div className="border border-gray-200 rounded-lg p-6 bg-white">
+                        <ComponentPreview
+                          componentName={variant.previewComponent}
+                        />
+                      </div>
+                    </TabsContent>
+
+                    <TabsContent
+                      value="code"
+                      className="mt-4"
+                    >
+                      <div className="relative">
+                        <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto text-sm border">
+                          <code className="text-gray-800">{variant.code}</code>
+                        </pre>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          className="absolute top-2 right-2"
+                          onClick={() => copyToClipboard(variant.code, copyId)}
+                        >
+                          {copiedCode === copyId ? (
+                            <Check className="h-4 w-4" />
+                          ) : (
+                            <Copy className="h-4 w-4" />
+                          )}
+                        </Button>
+                      </div>
+                    </TabsContent>
+                  </Tabs>
+                </CardContent>
+              </Card>
+            );
+          })}
         </section>
-      )}
+      ) : null}
 
       {/* API Reference */}
       {data.apiReference && (

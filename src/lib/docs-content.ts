@@ -13,15 +13,13 @@ export interface ComponentData {
   examples: {
     basic: {
       code: string;
-      previewComponent?: string; // Just store the component name as string
-    };
-    advanced?: {
-      code: string;
       previewComponent?: string;
     };
     variants?: {
       code: string;
       previewComponent?: string;
+      title?: string;
+      description?: string;
     }[];
   };
   apiReference?: {
@@ -220,7 +218,7 @@ const radioData: ComponentData = {
 const datagridData: ComponentData = {
   title: 'Data Grid Component',
   description:
-    'A powerful data grid component with sorting, filtering, and pagination built with Tailwind CSS.',
+    'A customizable DataGrid component for React, leveraging Tailwind CSS to deliver powerful sorting, filtering, and pagination out of the box.',
   version: 'v1.0.0',
   tableOfContents: [
     { id: 'overview', title: 'Overview', level: 1 },
@@ -245,16 +243,18 @@ const datagridData: ComponentData = {
       `,
       previewComponent: 'BasicDataGridDemo',
     },
-    advanced: {
-      code: `
-      <DataGrid
-        enableColumnReorder
-        rows={data}
-        columns={columns}
-      />
-      `,
-      previewComponent: 'AdvancedDataGridDemo',
-    },
+    variants: [
+      {
+        code: `
+        <DataGrid
+          enableColumnReorder
+          rows={data}
+          columns={columns}
+        />
+        `,
+        previewComponent: 'AdvancedDataGridDemo',
+      },
+    ],
   },
 };
 
