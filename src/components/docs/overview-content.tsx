@@ -25,15 +25,16 @@ export function OverviewContent() {
   const installCommand = 'npm install @your-org/twine-ui';
 
   return (
-    <div className="py-6 space-y-12">
+    <>
       {/* Header */}
-      <section
-        id="introduction"
-        className="scroll-mt-32 space-y-6"
-      >
+      <section aria-labelledby="introduction">
         <div className="space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">
+            <h1
+              id="introduction"
+              data-toc-title="Introduction"
+              className="text-3xl sm:text-4xl font-bold text-gray-900 scroll-mt-32"
+            >
               Twine UI
             </h1>
             <Badge variant="secondary">v1.0.0</Badge>
@@ -98,11 +99,11 @@ export function OverviewContent() {
       </section>
 
       {/* Installation */}
-      <section
-        id="installation"
-        className="scroll-mt-32 space-y-4"
-      >
-        <h2 className="text-xl sm:text-2xl font-semibold border-b border-gray-200 pb-2 text-gray-900">
+      <section aria-labelledby="installation">
+        <h2
+          id="installation"
+          className="text-xl sm:text-2xl font-semibold border-b border-gray-200 pb-2 text-gray-900 scroll-mt-32"
+        >
           Installation
         </h2>
         <div className="space-y-4">
@@ -130,11 +131,12 @@ export function OverviewContent() {
       </section>
 
       {/* Usage */}
-      <section
-        id="usage"
-        className="scroll-mt-32 space-y-4"
-      >
-        <h2 className="text-xl sm:text-2xl font-semibold border-b border-gray-200 pb-2 text-gray-900">
+      <section aria-labelledby="quick-start">
+        <h2
+          id="quick-start"
+          data-toc-title="Quick Start"
+          className="text-xl sm:text-2xl font-semibold border-b border-gray-200 pb-2 text-gray-900 scroll-mt-32"
+        >
           Quick Start
         </h2>
         <div className="space-y-4">
@@ -186,12 +188,13 @@ function App() {
         </div>
       </section>
 
-      {/* Components Preview */}
-      <section
-        id="components"
-        className="scroll-mt-32 space-y-4"
-      >
-        <h2 className="text-xl sm:text-2xl font-semibold border-b border-gray-200 pb-2 text-gray-900">
+      {/* Components */}
+      <section aria-labelledby="components">
+        <h2
+          id="components"
+          data-toc-title="Components"
+          className="text-xl sm:text-2xl font-semibold border-b border-gray-200 pb-2 text-gray-900 scroll-mt-32"
+        >
           Popular Components
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -285,11 +288,11 @@ function App() {
       </section>
 
       {/* Customization */}
-      <section
-        id="customization"
-        className="scroll-mt-32 space-y-4"
-      >
-        <h2 className="text-xl sm:text-2xl font-semibold border-b border-gray-200 pb-2 text-gray-900">
+      <section aria-labelledby="customization">
+        <h2
+          id="customization"
+          className="text-xl sm:text-2xl font-semibold border-b border-gray-200 pb-2 text-gray-900 scroll-mt-32"
+        >
           Customization
         </h2>
         <div className="space-y-4">
@@ -324,6 +327,6 @@ module.exports = {
           </Card>
         </div>
       </section>
-    </div>
+    </>
   );
 }

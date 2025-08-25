@@ -1,45 +1,58 @@
-import { DocsLayout } from '@/components/docs/docs-layout';
-import { ComponentContent } from '@/components/docs/component-content';
-import { getComponentData } from '@/lib/docs-content';
 import { notFound } from 'next/navigation';
+import DocsLayout from '@/components/docs/docs-layout';
+import ComponentPreview from '@/components/docs/component-preview';
+import { getDoc, registry, type DocSlug } from '@/content';
 
-interface ComponentPageProps {
-  params: Promise<{
-    component: string;
-  }>;
-}
+type PageProps = { params: { component: string } };
 
-export default async function ComponentPage({ params }: ComponentPageProps) {
-  const { component } = await params;
-  const componentData = getComponentData(component);
+const Page = async ({ params }: PageProps) => {
+  const slug = params.component as DocSlug;
 
-  if (!componentData) {
-    notFound();
+  try {
+    const doc = await getDoc(slug);
+
+    return (
+      <DocsLayout
+        title={doc.title}
+        description={doc.description}
+      >
+        {doc.previews.map((p) => (
+          <ComponentPreview
+            key={p.id}
+            id={p.id}
+            title={p.title}
+            description={p.description}
+          >
+            <p.component />
+          </ComponentPreview>
+        ))}
+      </DocsLayout>
+    );
+  } catch {
+    return notFound();
   }
+};
 
-  return (
-    <DocsLayout currentPage={component}>
-      <ComponentContent data={componentData} />
-    </DocsLayout>
-  );
+export default Page;
+
+// Prebuild static routes for all registered docs
+export const dynamicParams = false;
+export async function generateStaticParams() {
+  return (Object.keys(registry) as DocSlug[]).map((slug) => ({
+    component: slug,
+  }));
 }
 
-export async function generateStaticParams() {
-  const components = [
-    'button',
-    'input',
-    'card',
-    'modal',
-    'select',
-    'datagrid',
-    'datepicker',
-    'timepicker',
-    'container',
-    'grid',
-    'flexbox',
-  ];
-
-  return components.map((component) => ({
-    component: component,
-  }));
+// Per-page <head> metadata from the doc
+export async function generateMetadata({ params }: PageProps) {
+  const slug = params.component as DocSlug;
+  try {
+    const doc = await getDoc(slug);
+    return {
+      title: `${doc.title} – Components`,
+      description: doc.description,
+    };
+  } catch {
+    return { title: 'Not found' };
+  }
 }

@@ -1,0 +1,1 @@
+export { SortingFilteringDemo } from './SortingFilteringDemo';
