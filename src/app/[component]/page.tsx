@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: PageProps) {
   try {
     const doc = await getDoc(slug);
     return {
-      title: `${doc.title} – Components`,
+      title: `Twine UI - ${doc.title}`,
       description: doc.description,
     };
   } catch {
