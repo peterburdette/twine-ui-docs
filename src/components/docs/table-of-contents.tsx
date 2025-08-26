@@ -130,9 +130,9 @@ export function TableOfContents() {
       <div className="fixed top-14 right-0 bottom-0 w-64 border-l border-gray-200 bg-white z-20">
         <div className="h-full overflow-y-auto">
           <div className="pl-6 pr-4 py-6 space-y-2">
-            <h4 className="text-sm font-semibold text-gray-900 mb-4">
+            <h6 className="text-xs font-semibold text-gray-600 mb-4 uppercase">
               On this page
-            </h4>
+            </h6>
             <nav className="space-y-1">
               {tocItems.map((item) => (
                 <a
