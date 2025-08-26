@@ -37,22 +37,25 @@ const DocsLayout = ({
           <div className="flex-1 flex justify-center px-4 sm:px-6 lg:px-8 min-w-0">
             <main className="w-full max-w-none py-6 space-y-12 min-w-0">
               {(title || description) && (
-                <header className="space-y-4">
-                  {title && (
-                    <h1
-                      id={currentPage ?? 'overview'}
-                      data-toc-title={tocTitle ?? title}
-                      className="text-3xl sm:text-4xl font-bold text-gray-900 scroll-mt-32"
-                    >
-                      {title}
-                    </h1>
-                  )}
-                  {description && (
-                    <p className="text-md sm:text-md text-gray-600">
-                      {description}
-                    </p>
-                  )}
-                </header>
+                <>
+                  <header className="space-y-4">
+                    {title && (
+                      <h1
+                        id={currentPage ?? 'overview'}
+                        data-toc-title={tocTitle ?? title}
+                        className="text-3xl sm:text-4xl font-bold text-gray-900 scroll-mt-32"
+                      >
+                        {title}
+                      </h1>
+                    )}
+                    {description && (
+                      <p className="text-md sm:text-md text-gray-600">
+                        {description}
+                      </p>
+                    )}
+                  </header>
+                  <hr />
+                </>
               )}
               {children}
               <Footer />

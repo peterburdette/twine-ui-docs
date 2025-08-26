@@ -1,4 +1,4 @@
-import type { ApiSpec } from '@/components/docs/apiContent';
+import { ApiSpec } from './types';
 
 export const checkboxApi: ApiSpec = {
   component: 'Checkbox',
@@ -66,9 +66,9 @@ export const checkboxApi: ApiSpec = {
       description: 'Standard input control props...',
     },
   ],
-  notes: [
-    "Checkbox extendsOmit<React.InputHTMLAttributes<HTMLInputElement>, 'size'>",
-    'The component forwards its ref to the underlying <input>.',
-    'When indeterminate is provided, the component also sets aria-checked="mixed".',
-  ],
+  // notes: [
+  //   "Checkbox extendsOmit<React.InputHTMLAttributes<HTMLInputElement>, 'size'>",
+  //   'The component forwards its ref to the underlying <input>.',
+  //   'When indeterminate is provided, the component also sets aria-checked="mixed".',
+  // ],
 };

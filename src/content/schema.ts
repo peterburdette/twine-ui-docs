@@ -1,22 +1,48 @@
-import { ApiSpec } from '@/components/docs/apiContent';
+// content/schema.ts
 import type { ComponentType } from 'react';
+import type { ApiSpec } from './api/types';
+import type { A11ySpec } from './a11y/types';
 
-export interface DocPreview {
+export type DocPreview = {
   id: string;
   title: string;
   description?: string;
   component: ComponentType;
   code?: string;
-}
+};
 
-export interface DocSection {
-  id: string; // used for the h2 id / TOC anchor
-  title: string; // the h2 text (e.g., "Usage")
+type BaseSection = {
+  id: string; // anchor for TOC
+  title: string; // H2 text
   description?: string;
-  previews?: DocPreview[]; // optional list of previews under this section
-  content?: React.ReactNode; // optional arbitrary content under the h2
-  api?: ApiSpec;
-}
+};
+
+export type UsageSection = BaseSection & {
+  kind: 'usage';
+  previews: DocPreview[];
+};
+
+export type ApiSection = BaseSection & {
+  kind: 'api';
+  api: ApiSpec;
+};
+
+export type A11ySection = BaseSection & {
+  kind: 'a11y';
+  a11y: A11ySpec;
+};
+
+export type MarkdownSection = BaseSection & {
+  kind: 'markdown';
+  // store markdown (or even mdx source) as data
+  markdown: string;
+};
+
+export type DocSection =
+  | UsageSection
+  | ApiSection
+  | A11ySection
+  | MarkdownSection;
 
 export interface DocPage {
   slug: string;
@@ -25,5 +51,5 @@ export interface DocPage {
   category: string;
   toc: boolean;
   tocTitle?: string;
-  sections?: DocSection[];
+  sections: DocSection[];
 }

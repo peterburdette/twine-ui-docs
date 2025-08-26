@@ -3,23 +3,9 @@
 import * as React from 'react';
 import { DataGrid } from 'twine-ui';
 import { apiColumns } from './api-grid-columns';
+import { ApiSpec } from '@/content/api/types';
 
-export type PropRow = {
-  name: string;
-  type: string;
-  default?: string;
-  description: string;
-  required?: boolean;
-};
-
-export type ApiSpec = {
-  component: string;
-  description?: string;
-  props: PropRow[];
-  notes?: string[];
-};
-
-export const ApiContentGrid = ({ api }: { api: ApiSpec }) => {
+export const ApiContent = ({ api }: { api: ApiSpec }) => {
   const rows = React.useMemo(
     () =>
       api.props.map((p) => ({
