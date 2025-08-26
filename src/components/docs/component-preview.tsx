@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Button } from '@/components/ui/button';
+import { Button, Tooltip } from 'twine-ui';
 import { Code as CodeIcon, Copy, Check, Share2 } from 'lucide-react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -99,25 +99,39 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
       {/* Container for toolbar + demo + code */}
       <div className="rounded-md border overflow-hidden">
         {/* Toolbar */}
-        <div className="flex items-center justify-end flex-wrap gap-2 bg-gray-100 border-b px-3 py-2">
-          <Button
-            size="sm"
-            variant="outline"
-            onClick={handleShare}
+        <div className="flex items-center justify-end gap-2 bg-gray-100 border-b px-3 py-2">
+          <Tooltip
+            placement="bottom"
+            content={copied === 'link' ? 'Link copied' : 'Copy share link'}
           >
-            <Share2 className="h-4 w-4 mr-2" />
-            {copied === 'link' ? 'Copied!' : 'Share link'}
-          </Button>
+            <Button
+              size="icon"
+              variant="outline"
+              onClick={handleShare}
+              aria-label="Copy share link"
+            >
+              {copied === 'link' ? (
+                <Check className="h-4 w-4" />
+              ) : (
+                <Share2 className="h-4 w-4" />
+              )}
+            </Button>
+          </Tooltip>
 
           {code && (
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => setShowCode((p) => !p)}
+            <Tooltip
+              placement="bottom"
+              content={showCode ? 'Hide code' : 'Show code'}
             >
-              <CodeIcon className="h-4 w-4 mr-2" />
-              {showCode ? 'Hide code' : 'Show code'}
-            </Button>
+              <Button
+                size="icon"
+                variant="outline"
+                onClick={() => setShowCode((p) => !p)}
+                aria-label={showCode ? 'Hide code' : 'Show code'}
+              >
+                <CodeIcon className="h-4 w-4" />
+              </Button>
+            </Tooltip>
           )}
         </div>
 
@@ -145,11 +159,11 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
               ref={contentRef}
               className="relative bg-neutral-900 text-neutral-100"
             >
-              {/* Copy button (code) */}
+              {/* Copy button (inside code) */}
               <button
                 type="button"
                 onClick={() => handleCopy(code!, 'code')}
-                className="absolute top-3 right-3 inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm
+                className="absolute top-3 right-3 inline-flex items-center gap-1.5 rounded-md p-2
                   bg-white/10 text-white backdrop-blur-sm ring-1 ring-white/20
                   opacity-70 hover:opacity-100 focus-visible:opacity-100 transition-opacity"
                 aria-label="Copy code"
@@ -159,7 +173,6 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
                 ) : (
                   <Copy className="h-5 w-5" />
                 )}
-                <span className="sr-only">Copy</span>
               </button>
 
               <div className="max-h-[450px] overflow-y-auto">

@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import DocsLayout from '@/components/docs/docs-layout';
 import ComponentPreview from '@/components/docs/component-preview';
 import { getDoc, registry, type DocSlug } from '@/content';
+import { ApiContentGrid } from '@/components/docs/apiContent';
 
 type PageProps = { params: { component: string } };
 
@@ -29,8 +30,6 @@ const Page = async ({ params }: PageProps) => {
               {section.title}
             </h2>
 
-            {section.content}
-
             {section.previews?.map((p) => (
               <ComponentPreview
                 key={p.id}
@@ -42,6 +41,12 @@ const Page = async ({ params }: PageProps) => {
                 <p.component />
               </ComponentPreview>
             ))}
+
+            {/* Render API spec if provided */}
+            {section.api ? <ApiContentGrid api={section.api} /> : null}
+
+            {/* Or arbitrary content */}
+            {!section.api && section.content ? section.content : null}
           </section>
         ))}
       </DocsLayout>

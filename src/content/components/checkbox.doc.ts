@@ -13,6 +13,9 @@ import { CheckboxIntermediateDemoCode } from '@/components/demos/Checkbox/Checkb
 import { CheckboxLabelsDemoCode } from '@/components/demos/Checkbox/CheckboxLabelsDemo.code';
 import { CheckboxSizesDemoCode } from '@/components/demos/Checkbox/CheckboxSizesDemo.code';
 import { CheckboxVariantsDemoCode } from '@/components/demos/Checkbox/CheckboxVariantsDemo.code';
+import { checkboxApi } from '../api/Checkbox.api';
+import { CheckboxLabelPlacementDemo } from '@/components/demos/Checkbox/CheckboxLabelPlacementDemo';
+import { CheckboxLabelPlacementDemoCode } from '@/components/demos/Checkbox/CheckboxLabelPlacementDemo.code';
 
 export const doc: DocPage = {
   slug: 'checkbox',
@@ -43,6 +46,14 @@ export const doc: DocPage = {
             'Add descriptive text to a Checkbox by wrapping it with the FormControlLabel component.',
           component: CheckboxLabelsDemo,
           code: CheckboxLabelsDemoCode,
+        },
+        {
+          id: 'label-placement',
+          title: 'Label Placement',
+          description:
+            'Control the placement of the Checkbox label by using the FormControlLabel component.',
+          component: CheckboxLabelPlacementDemo,
+          code: CheckboxLabelPlacementDemoCode,
         },
         {
           id: 'controlled',
@@ -78,13 +89,10 @@ export const doc: DocPage = {
         },
       ],
     },
-
-    // Add more h2 sections as needed:
-    // e.g., API, Accessibility, Best Practices, etc.
     {
       id: 'api',
       title: 'API',
-      content: 'test',
+      api: checkboxApi,
     },
   ],
 };
