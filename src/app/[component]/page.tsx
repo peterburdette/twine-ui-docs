@@ -22,6 +22,7 @@ const Page = async ({ params }: PageProps) => {
             id={p.id}
             title={p.title}
             description={p.description}
+            code={p.code}
           >
             <p.component />
           </ComponentPreview>
