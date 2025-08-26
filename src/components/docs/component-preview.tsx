@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { Button } from '@/components/ui/button';
-import { Code as CodeIcon, Copy, Check } from 'lucide-react';
+import { Code as CodeIcon, Copy, Check, Share2 } from 'lucide-react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
@@ -33,12 +33,12 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
   code,
 }) => {
   const [showCode, setShowCode] = React.useState(false);
-  const [copied, setCopied] = React.useState(false);
+  const [copied, setCopied] = React.useState<string | null>(null);
   const [maxHeight, setMaxHeight] = React.useState<number>(0);
+
   const contentRef = React.useRef<HTMLDivElement>(null);
   const headingId = id ?? (title ? slugify(title) : undefined);
 
-  // Measure content height so both opening and closing animate smoothly
   const recalc = React.useCallback(() => {
     if (!contentRef.current) return;
     const h = contentRef.current.scrollHeight;
@@ -49,7 +49,6 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
     recalc();
   }, [recalc, code]);
 
-  // Keep animation accurate on resize
   React.useEffect(() => {
     const ro = new ResizeObserver(() => recalc());
     if (contentRef.current) ro.observe(contentRef.current);
@@ -61,60 +60,72 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
     };
   }, [recalc]);
 
-  const handleCopy = async () => {
-    if (!code) return;
+  const handleCopy = async (text: string, type: string) => {
     try {
-      await navigator.clipboard.writeText(code);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1200);
+      await navigator.clipboard.writeText(text);
+      setCopied(type);
+      setTimeout(() => setCopied(null), 1200);
     } catch {}
+  };
+
+  const handleShare = () => {
+    const link = `${window.location.origin}${window.location.pathname}#${headingId}`;
+    handleCopy(link, 'link');
   };
 
   return (
     <section
-      id={headingId}
       className={`mb-8 ${className}`}
       aria-labelledby={headingId}
     >
       {(title || description) && (
-        <header className="mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-4">
-          <div className="min-w-0">
-            {title && (
-              <h3
-                id={headingId}
-                className="text-lg font-semibold scroll-mt-32"
-              >
-                {title}
-              </h3>
-            )}
-            {description && (
-              <p className="mt-1 text-md text-gray-600 text-muted-foreground">
-                {description}
-              </p>
-            )}
-          </div>
+        <header className="mb-4">
+          {title && (
+            <h3
+              id={headingId}
+              className="text-lg font-semibold scroll-mt-16"
+            >
+              {title}
+            </h3>
+          )}
+          {description && (
+            <p className="mt-1 text-md text-gray-600 text-muted-foreground">
+              {description}
+            </p>
+          )}
+        </header>
+      )}
+
+      {/* Container for toolbar + demo + code */}
+      <div className="rounded-md border overflow-hidden">
+        {/* Toolbar */}
+        <div className="flex items-center justify-end flex-wrap gap-2 bg-gray-100 border-b px-3 py-2">
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={handleShare}
+          >
+            <Share2 className="h-4 w-4 mr-2" />
+            {copied === 'link' ? 'Copied!' : 'Share link'}
+          </Button>
 
           {code && (
             <Button
               size="sm"
               variant="outline"
               onClick={() => setShowCode((p) => !p)}
-              className="whitespace-nowrap shrink-0 self-start md:self-auto mt-1 md:mt-0"
             >
               <CodeIcon className="h-4 w-4 mr-2" />
               {showCode ? 'Hide code' : 'Show code'}
             </Button>
           )}
-        </header>
-      )}
+        </div>
 
-      {/* Attached container for demo + code */}
-      <div className="rounded-md border overflow-hidden">
         {/* Demo */}
         <div
           className={`flex items-center justify-center min-h-[120px] ${
             padded ? 'p-6' : ''
-          }`}
+          } bg-white`}
         >
           {children ?? (
             <div className="flex items-center justify-center text-gray-500">
@@ -134,17 +145,16 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
               ref={contentRef}
               className="relative bg-neutral-900 text-neutral-100"
             >
-              {/* Copy button fixed in top-right corner of preview */}
+              {/* Copy button (code) */}
               <button
                 type="button"
-                onClick={handleCopy}
+                onClick={() => handleCopy(code!, 'code')}
                 className="absolute top-3 right-3 inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm
-                   bg-white/10 text-white backdrop-blur-sm ring-1 ring-white/20
-                   opacity-70 hover:opacity-100 focus-visible:opacity-100 transition-opacity"
+                  bg-white/10 text-white backdrop-blur-sm ring-1 ring-white/20
+                  opacity-70 hover:opacity-100 focus-visible:opacity-100 transition-opacity"
                 aria-label="Copy code"
-                title="Copy code"
               >
-                {copied ? (
+                {copied === 'code' ? (
                   <Check className="h-5 w-5" />
                 ) : (
                   <Copy className="h-5 w-5" />
@@ -152,7 +162,6 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
                 <span className="sr-only">Copy</span>
               </button>
 
-              {/* Make only the code scrollable */}
               <div className="max-h-[450px] overflow-y-auto">
                 <SyntaxHighlighter
                   language="tsx"
