@@ -1,6 +1,4 @@
-'use client';
-
-import * as React from 'react';
+export const CheckboxControlledDemoCode = `import * as React from 'react';
 import { Checkbox, FormControlLabel } from 'twine-ui';
 
 export const CheckboxControlledDemo: React.FC = () => {
@@ -19,4 +17,4 @@ export const CheckboxControlledDemo: React.FC = () => {
       </span>
     </div>
   );
-};
+};`;

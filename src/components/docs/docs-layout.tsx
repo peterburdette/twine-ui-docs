@@ -12,6 +12,7 @@ type DocsLayoutProps = {
   currentPage?: string;
   title?: string;
   description?: string;
+  tocTitle?: string;
 };
 
 const DocsLayout = ({
@@ -19,6 +20,7 @@ const DocsLayout = ({
   currentPage,
   title,
   description,
+  tocTitle,
 }: DocsLayoutProps) => {
   return (
     <DocsProvider currentPage={currentPage}>
@@ -38,7 +40,8 @@ const DocsLayout = ({
                 <header className="space-y-4">
                   {title && (
                     <h1
-                      id="overview"
+                      id={currentPage ?? 'overview'}
+                      data-toc-title={tocTitle ?? title}
                       className="text-3xl sm:text-4xl font-bold text-gray-900 scroll-mt-32"
                     >
                       {title}

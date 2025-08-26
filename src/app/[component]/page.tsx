@@ -15,6 +15,7 @@ const Page = async ({ params }: PageProps) => {
       <DocsLayout
         title={doc.title}
         description={doc.description}
+        tocTitle={doc.tocTitle}
       >
         {doc.previews.map((p) => (
           <ComponentPreview

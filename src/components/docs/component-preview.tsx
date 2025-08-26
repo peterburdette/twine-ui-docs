@@ -77,8 +77,8 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
       aria-labelledby={headingId}
     >
       {(title || description) && (
-        <header className="mb-4 flex items-center justify-between">
-          <div>
+        <header className="mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-4">
+          <div className="min-w-0">
             {title && (
               <h2
                 id={headingId}
@@ -99,6 +99,7 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
               size="sm"
               variant="outline"
               onClick={() => setShowCode((p) => !p)}
+              className="whitespace-nowrap shrink-0 self-start md:self-auto mt-1 md:mt-0"
             >
               <CodeIcon className="h-4 w-4 mr-2" />
               {showCode ? 'Hide code' : 'Show code'}
@@ -110,9 +111,13 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
       {/* Attached container for demo + code */}
       <div className="rounded-md border overflow-hidden">
         {/* Demo */}
-        <div className={padded ? 'p-6' : ''}>
+        <div
+          className={`flex items-center justify-center min-h-[120px] ${
+            padded ? 'p-6' : ''
+          }`}
+        >
           {children ?? (
-            <div className="flex min-h-[100px] items-center justify-center text-gray-500">
+            <div className="flex items-center justify-center text-gray-500">
               No preview available
             </div>
           )}
@@ -121,7 +126,7 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
         {/* Code */}
         {code && (
           <div
-            className="border-t overflow-hidden transition-[max-height] duration-200 ease-out"
+            className="overflow-hidden transition-[max-height] duration-200 ease-out"
             style={{ maxHeight }}
             aria-hidden={!showCode}
           >
@@ -129,13 +134,13 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
               ref={contentRef}
               className="relative bg-neutral-900 text-neutral-100"
             >
-              {/* Copy button */}
+              {/* Copy button fixed in top-right corner of preview */}
               <button
                 type="button"
                 onClick={handleCopy}
                 className="absolute top-3 right-3 inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm
-                           bg-white/10 text-white backdrop-blur-sm ring-1 ring-white/20
-                           opacity-70 hover:opacity-100 focus-visible:opacity-100 transition-opacity"
+                   bg-white/10 text-white backdrop-blur-sm ring-1 ring-white/20
+                   opacity-70 hover:opacity-100 focus-visible:opacity-100 transition-opacity"
                 aria-label="Copy code"
                 title="Copy code"
               >
@@ -147,19 +152,22 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
                 <span className="sr-only">Copy</span>
               </button>
 
-              <SyntaxHighlighter
-                language="tsx"
-                style={vscDarkPlus}
-                customStyle={{
-                  margin: 0,
-                  borderRadius: 0,
-                  background: 'transparent',
-                  padding: '1rem',
-                }}
-                showLineNumbers={false}
-              >
-                {code}
-              </SyntaxHighlighter>
+              {/* Make only the code scrollable */}
+              <div className="max-h-[450px] overflow-y-auto">
+                <SyntaxHighlighter
+                  language="tsx"
+                  style={vscDarkPlus}
+                  customStyle={{
+                    margin: 0,
+                    borderRadius: 0,
+                    background: 'transparent',
+                    padding: '1rem',
+                  }}
+                  showLineNumbers={false}
+                >
+                  {code}
+                </SyntaxHighlighter>
+              </div>
             </div>
           </div>
         )}

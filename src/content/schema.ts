@@ -14,6 +14,7 @@ export type DocPage = {
   description?: string;
   category?: string;
   toc?: boolean;
+  tocTitle?: string;
   previews: Preview[];
   seo?: {
     keywords?: string[];
