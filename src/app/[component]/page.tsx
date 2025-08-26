@@ -17,16 +17,32 @@ const Page = async ({ params }: PageProps) => {
         description={doc.description}
         tocTitle={doc.tocTitle}
       >
-        {doc.previews.map((p) => (
-          <ComponentPreview
-            key={p.id}
-            id={p.id}
-            title={p.title}
-            description={p.description}
-            code={p.code}
+        {doc.sections?.map((section) => (
+          <section
+            key={section.id}
+            className="space-y-6"
           >
-            <p.component />
-          </ComponentPreview>
+            <h2
+              id={section.id}
+              className="text-2xl font-semibold scroll-mt-32"
+            >
+              {section.title}
+            </h2>
+
+            {section.content}
+
+            {section.previews?.map((p) => (
+              <ComponentPreview
+                key={p.id}
+                id={p.id}
+                title={p.title}
+                description={p.description}
+                code={p.code}
+              >
+                <p.component />
+              </ComponentPreview>
+            ))}
+          </section>
         ))}
       </DocsLayout>
     );

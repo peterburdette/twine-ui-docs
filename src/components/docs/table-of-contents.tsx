@@ -143,18 +143,16 @@ export function TableOfContents() {
                     scrollToId(item.id);
                   }}
                   className={cn(
-                    'block py-1.5 text-sm transition-colors cursor-pointer',
-                    item.level === 1
-                      ? 'pl-0'
-                      : item.level === 2
-                      ? 'pl-4'
-                      : 'pl-8',
+                    'relative block py-1.5 text-sm transition-colors cursor-pointer',
                     activeSection === item.id
-                      ? 'text-blue-600 font-medium border-l-2 border-blue-600 bg-blue-50 pl-3'
+                      ? 'text-blue-600 font-medium border-l-2 border-blue-600 bg-blue-50'
                       : 'text-gray-500 hover:text-gray-900'
                   )}
                 >
-                  {item.title}
+                  {/* h1/h2 have no indent, h3 indents */}
+                  <span className={item.level === 3 ? 'pl-6' : 'pl-3'}>
+                    {item.title}
+                  </span>
                 </a>
               ))}
             </nav>

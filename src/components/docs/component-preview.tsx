@@ -80,15 +80,15 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
         <header className="mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-4">
           <div className="min-w-0">
             {title && (
-              <h2
+              <h3
                 id={headingId}
-                className="text-2xl font-semibold scroll-mt-32"
+                className="text-lg font-semibold scroll-mt-32"
               >
                 {title}
-              </h2>
+              </h3>
             )}
             {description && (
-              <p className="mt-1 text-md text-muted-foreground">
+              <p className="mt-1 text-md text-gray-600 text-muted-foreground">
                 {description}
               </p>
             )}
