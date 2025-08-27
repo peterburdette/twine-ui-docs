@@ -1,7 +1,9 @@
 export * from './RadioBasicDemo';
-export * from './RadioLabelsDemo';
-export * from './RadioGroupVerticalDemo';
-export * from './RadioGroupHorizontalDemo';
+export * from './RadioControlledDemo';
 export * from './RadioSizesDemo';
 export * from './RadioVariantsDemo';
-export * from './RadioDisabledRequiredDemo';
+
+export * from './RadioBasicDemo.code';
+export * from './RadioControlledDemo.code';
+export * from './RadioSizesDemo.code';
+export * from './RadioVariantsDemo.code';
