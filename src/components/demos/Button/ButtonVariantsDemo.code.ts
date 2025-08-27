@@ -1,4 +1,4 @@
-import * as React from 'react';
+export const ButtonVariantsDemoCode = `import * as React from 'react';
 import { Button } from 'twine-ui';
 
 export const ButtonVariantsDemo: React.FC = () => {
@@ -17,3 +17,4 @@ export const ButtonVariantsDemo: React.FC = () => {
     </div>
   );
 };
+`;
