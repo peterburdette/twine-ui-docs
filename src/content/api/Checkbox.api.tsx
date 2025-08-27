@@ -2,8 +2,6 @@ import { ApiSpec } from './types';
 
 export const checkboxApi: ApiSpec = {
   component: 'Checkbox',
-  description:
-    'The following documentation includes a complete reference to all supported props and classes for the components described above.',
   props: [
     {
       name: 'size',
