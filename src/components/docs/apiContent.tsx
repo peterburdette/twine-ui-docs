@@ -22,7 +22,6 @@ export const ApiContent = ({ api }: { api: ApiSpec }) => {
   return (
     <section className="space-y-4">
       <div className="text-sm text-muted-foreground">
-        <code>{api.component}</code>
         {api.description ? <>{api.description}</> : null}
       </div>
 
