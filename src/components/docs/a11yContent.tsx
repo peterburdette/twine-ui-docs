@@ -5,13 +5,9 @@ import { A11ySpec } from '@/content/a11y/types';
 
 export const A11yContent = ({ a11y }: { a11y: A11ySpec }) => {
   return (
-    <section className="space-y-4">
-      <p className="text-sm text-muted-foreground">
-        Accessibility notes for <code>{a11y.component}</code>:
-      </p>
-
+    <section className="rounded-xl border bg-muted/30 p-4 md:p-6">
       {/* Bulleted list */}
-      <ul className="list-disc pl-6 space-y-2 text-sm">
+      <ul className="mt-4 list-disc pl-6 text-sm space-y-2 marker:text-muted-foreground/70">
         {a11y.items.map((it, i) => (
           <li
             key={i}
@@ -29,17 +25,23 @@ export const A11yContent = ({ a11y }: { a11y: A11ySpec }) => {
         ))}
       </ul>
 
+      {/* Notes */}
       {!!a11y.notes?.length && (
-        <div className="space-y-2">
-          <h3 className="text-base font-medium">Notes</h3>
-          <ul className="list-disc pl-6 text-sm text-muted-foreground space-y-1">
+        <div className="mt-5 rounded-lg border bg-background/60 p-3 md:p-4 shadow-sm">
+          <h4 className="text-sm font-medium mb-2 flex items-center gap-2">
+            <span
+              aria-hidden="true"
+              className="inline-block h-2 w-2 rounded-full bg-yellow-500"
+            />
+            Notes
+          </h4>
+          <ul className="list-disc pl-6 text-sm text-muted-foreground space-y-1 marker:text-muted-foreground/70">
             {a11y.notes.map((n, i) => (
               <li key={i}>{n}</li>
             ))}
           </ul>
         </div>
       )}
-      <hr />
     </section>
   );
 };
