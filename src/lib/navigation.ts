@@ -197,13 +197,11 @@ export const navigationData: NavigationSection[] = [
     id: 'form',
     title: 'Form Components',
     items: [
-      route('Button', '/button', MousePointer),
-      route('Input', '/input', Type),
-      // Once the checkbox page is registered, change to:
-      // doc('Checkbox', 'checkbox', SquareCheck)
-      route('Checkbox', '/checkbox', SquareCheck),
-      route('Select', '/select', SquareChevronDown),
+      doc('Button', 'button', MousePointer),
+      doc('Input', 'input', Type),
+      doc('Checkbox', 'checkbox', SquareCheck),
       doc('Radio', 'radio', CircleDot),
+      doc('Select', 'select', SquareChevronDown),
       route('Date Picker', '/datepicker', Calendar),
       route('Time Picker', '/timepicker', Clock),
     ],

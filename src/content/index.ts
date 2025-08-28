@@ -5,8 +5,8 @@ export const registry = {
   input: () => import('./components/input.doc').then((m) => m.doc as DocPage),
   checkbox: () =>
     import('./components/checkbox.doc').then((m) => m.doc as DocPage),
-  select: () => import('./components/select.doc').then((m) => m.doc as DocPage),
   radio: () => import('./components/radio.doc').then((m) => m.doc as DocPage),
+  select: () => import('./components/select.doc').then((m) => m.doc as DocPage),
   datagrid: () =>
     import('./components/datagrid.doc').then((m) => m.doc as DocPage),
 } as const;
