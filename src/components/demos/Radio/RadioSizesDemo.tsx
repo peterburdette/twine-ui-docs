@@ -1,108 +1,144 @@
 'use client';
 
 import * as React from 'react';
-import { Radio } from 'twine-ui';
+import { Radio, RadioGroup, FormControlLabel } from 'twine-ui';
 
 export const RadioSizesDemo: React.FC = () => {
   return (
-    <div className="grid gap-4 sm:max-w-md">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-full">
       {/* Small */}
-      <div className="space-y-2">
+      <div className="space-y-2 min-w-0">
         <p
           id="size-sm-label"
           className="text-sm font-medium"
         >
           Small
         </p>
-        <div
-          role="radiogroup"
+        <RadioGroup
           aria-labelledby="size-sm-label"
-          className="grid gap-2 rounded-md border p-3"
+          name="sizes-sm" // ensure one shared name
+          defaultValue="a"
+          size="sm"
+          className="grid gap-2 rounded-md border p-3 w-full"
         >
-          <label className="flex items-center gap-2">
+          <FormControlLabel
+            label="Option A"
+            size="sm"
+          >
             <Radio
-              name="size-sm"
               value="a"
               size="sm"
-              defaultChecked
             />
-            <span className="text-sm">Option A</span>
-          </label>
-          <label className="flex items-center gap-2">
+          </FormControlLabel>
+          <FormControlLabel
+            label="Option B"
+            size="sm"
+          >
             <Radio
-              name="size-sm"
               value="b"
               size="sm"
             />
-            <span className="text-sm">Option B</span>
-          </label>
-        </div>
+          </FormControlLabel>
+          <FormControlLabel
+            label="Option C"
+            size="sm"
+          >
+            <Radio
+              value="c"
+              size="sm"
+            />
+          </FormControlLabel>
+        </RadioGroup>
       </div>
 
       {/* Medium */}
-      <div className="space-y-2">
+      <div className="space-y-2 min-w-0">
         <p
           id="size-md-label"
           className="text-sm font-medium"
         >
           Medium
         </p>
-        <div
-          role="radiogroup"
+        <RadioGroup
           aria-labelledby="size-md-label"
-          className="grid gap-2 rounded-md border p-3"
+          name="sizes-md" // ensure one shared name
+          defaultValue="a"
+          size="md"
+          className="grid gap-2 rounded-md border p-3 w-full"
         >
-          <label className="flex items-center gap-2">
+          <FormControlLabel
+            label="Option A"
+            size="md"
+          >
             <Radio
-              name="size-md"
               value="a"
               size="md"
-              defaultChecked
             />
-            <span>Option A</span>
-          </label>
-          <label className="flex items-center gap-2">
+          </FormControlLabel>
+          <FormControlLabel
+            label="Option B"
+            size="md"
+          >
             <Radio
-              name="size-md"
               value="b"
               size="md"
             />
-            <span>Option B</span>
-          </label>
-        </div>
+          </FormControlLabel>
+          <FormControlLabel
+            label="Option C"
+            size="md"
+          >
+            <Radio
+              value="c"
+              size="md"
+            />
+          </FormControlLabel>
+        </RadioGroup>
       </div>
 
       {/* Large */}
-      <div className="space-y-2">
+      <div className="space-y-2 min-w-0">
         <p
           id="size-lg-label"
           className="text-sm font-medium"
         >
           Large
         </p>
-        <div
-          role="radiogroup"
+        <RadioGroup
           aria-labelledby="size-lg-label"
-          className="grid gap-2 rounded-md border p-3"
+          name="sizes-lg" // ensure one shared name
+          defaultValue="a"
+          size="lg"
+          className="grid gap-2 rounded-md border p-3 w-full"
         >
-          <label className="flex items-center gap-2">
+          <FormControlLabel
+            label="Option A"
+            size="lg"
+          >
             <Radio
-              name="size-lg"
               value="a"
               size="lg"
-              defaultChecked
             />
-            <span className="text-base">Option A</span>
-          </label>
-          <label className="flex items-center gap-2">
+          </FormControlLabel>
+          <FormControlLabel
+            label="Option B"
+            size="lg"
+          >
             <Radio
-              name="size-lg"
               value="b"
               size="lg"
             />
-            <span className="text-base">Option B</span>
-          </label>
-        </div>
+          </FormControlLabel>
+          <FormControlLabel
+            label="Option C"
+            size="lg"
+          >
+            <Radio
+              value="c"
+              size="lg"
+            />
+          </FormControlLabel>
+        </RadioGroup>
       </div>
     </div>
   );

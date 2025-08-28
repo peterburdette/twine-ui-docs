@@ -76,7 +76,7 @@ export const doc: DocPage = {
         },
         {
           id: 'sizes',
-          title: 'Size',
+          title: 'Sizes',
           description:
             'Select a size that fits density and touch targets across your UI.',
           component: CheckboxSizesDemo,

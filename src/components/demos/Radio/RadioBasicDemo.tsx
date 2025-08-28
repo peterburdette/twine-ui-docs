@@ -1,77 +1,37 @@
 'use client';
 
 import * as React from 'react';
-import { Radio } from 'twine-ui';
+import { Radio, RadioGroup } from 'twine-ui';
 
 export const RadioBasicDemo: React.FC = () => {
-  const name = 'notifications-basic';
-  const labelId = `${name}-label`;
+  const groupId = 'notifications-basic-label';
 
   return (
-    <div className="space-y-2 sm:max-w-md">
-      <p
-        id={labelId}
-        className="text-sm font-medium"
+    <div className="space-y-2">
+      <RadioGroup
+        aria-labelledby={groupId}
+        name="no-label-demo"
+        defaultValue="demo 1"
+        orientation="horizontal"
+        className="inline-flex flex-row items-center gap-4"
       >
-        Notifications
-      </p>
-
-      <div
-        role="radiogroup"
-        aria-labelledby={labelId}
-        className="grid gap-2 rounded-md border p-3"
-      >
-        <label
-          htmlFor={`${name}-all`}
-          className="flex cursor-pointer items-center gap-2"
-        >
-          <Radio
-            id={`${name}-all`}
-            name={name}
-            value="all"
-            defaultChecked
-          />
-          <span>All activity</span>
-        </label>
-
-        <label
-          htmlFor={`${name}-mentions`}
-          className="flex cursor-pointer items-center gap-2"
-        >
-          <Radio
-            id={`${name}-mentions`}
-            name={name}
-            value="mentions"
-          />
-          <span>Mentions only</span>
-        </label>
-
-        <label
-          htmlFor={`${name}-none`}
-          className="flex cursor-pointer items-center gap-2"
-        >
-          <Radio
-            id={`${name}-none`}
-            name={name}
-            value="none"
-          />
-          <span>None</span>
-        </label>
-
-        <div className="mt-1 flex items-center gap-2 text-sm text-muted-foreground">
-          <Radio
-            id={`${name}-disabled`}
-            name={`${name}-disabled`}
-            disabled
-          />
-          <label
-            htmlFor={`${name}-disabled`}
-            className="cursor-not-allowed"
-          >
-            Disabled example
-          </label>
-        </div>
-      </div>
+        <Radio
+          value="demo 1"
+          aria-label="Demo 1"
+          title="Demo 1"
+        />
+        <Radio
+          value="demo 2"
+          aria-label="Demo 2"
+          title="Demo 2"
+        />
+        <Radio
+          value="demo 3"
+          disabled
+          aria-label="Demo 3"
+          title="Demo 3"
+        />
+      </RadioGroup>
     </div>
   );
 };

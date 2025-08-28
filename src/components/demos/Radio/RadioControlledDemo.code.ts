@@ -1,37 +1,39 @@
 export const RadioControlledDemoCode = `'use client';
 
 import * as React from 'react';
-import { Radio } from 'twine-ui';
+import { Radio, RadioGroup, FormControlLabel } from 'twine-ui';
 
-export const RadioControlledDemo = () => {
-  const name = 'plan-controlled';
+export const RadioControlledDemo: React.FC = () => {
+  const groupId = 'plans-controlled-label';
   const [value, setValue] = React.useState('starter');
 
   return (
-    <fieldset className="grid gap-2 rounded-md border p-3 sm:max-w-md">
-      <legend className="text-sm font-medium">Choose a plan</legend>
+    <div className="space-y-2 sm:max-w-md">
+      <p id={groupId} className="text-sm font-medium">
+        Choose a plan
+      </p>
 
-      {[
-        { id: 'starter', label: 'Starter' },
-        { id: 'pro', label: 'Pro' },
-        { id: 'enterprise', label: 'Enterprise' },
-      ].map((opt) => (
-        <label key={opt.id} htmlFor={\`\${name}-\${opt.id}\`} className="flex cursor-pointer items-center gap-2">
-          <Radio
-            id={\`\${name}-\${opt.id}\`}
-            name={name}
-            value={opt.id}
-            checked={value === opt.id}
-            onChange={() => setValue(opt.id)}
-          />
-          <span>{opt.label}</span>
-        </label>
-      ))}
+      <RadioGroup
+        aria-labelledby={groupId}
+        value={value}
+        onChange={setValue}
+        className="grid gap-2 rounded-md border p-3"
+      >
+        <FormControlLabel label="Starter">
+          <Radio value="starter" />
+        </FormControlLabel>
+        <FormControlLabel label="Pro">
+          <Radio value="pro" />
+        </FormControlLabel>
+        <FormControlLabel label="Enterprise">
+          <Radio value="enterprise" />
+        </FormControlLabel>
+      </RadioGroup>
 
-      <p className="mt-1 text-sm text-muted-foreground">
+      <p className="text-sm text-muted-foreground">
         Selected: <span className="font-medium">{value}</span>
       </p>
-    </fieldset>
+    </div>
   );
 };
 `;

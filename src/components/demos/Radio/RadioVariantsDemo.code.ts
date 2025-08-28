@@ -1,56 +1,85 @@
-export const RadioVariantsDemoCode = `import * as React from 'react';
-import { Radio } from 'twine-ui';
+export const RadioVariantsDemoCode = `'use client';
 
-export const RadioVariantsDemo = () => {
+import * as React from 'react';
+import { Radio, RadioGroup, FormControlLabel } from 'twine-ui';
+
+export const RadioVariantsDemo: React.FC = () => {
   return (
-    <div className="grid gap-4 sm:max-w-md">
-      <fieldset className="grid gap-2 rounded-md border p-3">
-        <legend className="text-sm font-medium">Default</legend>
-        <label className="flex items-center gap-2">
-          <Radio name="v-default" value="a" variant="default" defaultChecked />
-          <span>Default A</span>
-        </label>
-        <label className="flex items-center gap-2">
-          <Radio name="v-default" value="b" variant="default" />
-          <span>Default B</span>
-        </label>
-      </fieldset>
+    <div className="grid gap-6 md:grid-cols-2 md:gap-8 sm:max-w-2xl">
+      {/* Column A: Standard */}
+      <div className="space-y-2">
+        <p className="text-sm font-medium">Standard</p>
+        <RadioGroup
+          defaultValue="default-a"
+          className="grid gap-2 rounded-md border p-3"
+        >
+          <FormControlLabel label="Default">
+            <Radio
+              value="default-a"
+              variant="default"
+            />
+          </FormControlLabel>
+          <FormControlLabel label="Success">
+            <Radio
+              value="success-a"
+              variant="success"
+            />
+          </FormControlLabel>
+          <FormControlLabel label="Warning">
+            <Radio
+              value="warning-a"
+              variant="warning"
+            />
+          </FormControlLabel>
+          <FormControlLabel label="Error">
+            <Radio
+              value="error-a"
+              variant="error"
+            />
+          </FormControlLabel>
+        </RadioGroup>
+      </div>
 
-      <fieldset className="grid gap-2 rounded-md border p-3">
-        <legend className="text-sm font-medium">Success</legend>
-        <label className="flex items-center gap-2">
-          <Radio name="v-success" value="a" variant="success" defaultChecked />
-          <span>Success A</span>
-        </label>
-        <label className="flex items-center gap-2">
-          <Radio name="v-success" value="b" variant="success" />
-          <span>Success B</span>
-        </label>
-      </fieldset>
-
-      <fieldset className="grid gap-2 rounded-md border p-3">
-        <legend className="text-sm font-medium">Warning</legend>
-        <label className="flex items-center gap-2">
-          <Radio name="v-warning" value="a" variant="warning" defaultChecked />
-          <span>Warning A</span>
-        </label>
-        <label className="flex items-center gap-2">
-          <Radio name="v-warning" value="b" variant="warning" />
-          <span>Warning B</span>
-        </label>
-      </fieldset>
-
-      <fieldset className="grid gap-2 rounded-md border p-3">
-        <legend className="text-sm font-medium">Error</legend>
-        <label className="flex items-center gap-2">
-          <Radio name="v-error" value="a" variant="error" defaultChecked />
-          <span>Error A</span>
-        </label>
-        <label className="flex items-center gap-2">
-          <Radio name="v-error" value="b" variant="error" />
-          <span>Error B</span>
-        </label>
-      </fieldset>
+      {/* Column B: With focus ring */}
+      <div className="space-y-2">
+        <p className="text-sm font-medium">With focus ring</p>
+        <RadioGroup
+          defaultValue="default-b"
+          className="grid gap-2 rounded-md border p-3"
+        >
+          <FormControlLabel label="Default">
+            <Radio
+              value="default-b"
+              variant="default"
+              showFocusRing
+            />
+          </FormControlLabel>
+          <FormControlLabel label="Success">
+            <Radio
+              value="success-b"
+              variant="success"
+              showFocusRing
+            />
+          </FormControlLabel>
+          <FormControlLabel label="Warning">
+            <Radio
+              value="warning-b"
+              variant="warning"
+              showFocusRing
+            />
+          </FormControlLabel>
+          <FormControlLabel label="Error">
+            <Radio
+              value="error-b"
+              variant="error"
+              showFocusRing
+            />
+          </FormControlLabel>
+        </RadioGroup>
+        <p className="text-xs text-muted-foreground">
+          Tab to a radio and use arrow keys to see the focus ring in action.
+        </p>
+      </div>
     </div>
   );
 };

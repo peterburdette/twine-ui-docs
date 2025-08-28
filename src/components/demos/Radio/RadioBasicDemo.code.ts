@@ -1,32 +1,38 @@
-export const RadioBasicDemoCode = `import * as React from 'react';
-import { Radio } from 'twine-ui';
+export const RadioBasicDemoCode = `'use client';
 
-export const RadioBasicDemo = () => {
-  const group = 'notifications-basic';
+import * as React from 'react';
+import { Radio, RadioGroup } from 'twine-ui';
+
+export const RadioBasicDemo: React.FC = () => {
+  const groupId = 'notifications-basic-label';
+
   return (
-    <fieldset className="grid gap-2 rounded-md border p-3 sm:max-w-md">
-      <legend className="text-sm font-medium">Notifications</legend>
-
-      <div className="flex items-center gap-2">
-        <Radio id={\`\${group}-all\`} name={group} value="all" defaultChecked />
-        <label htmlFor={\`\${group}-all\`} className="cursor-pointer">All activity</label>
-      </div>
-
-      <div className="flex items-center gap-2">
-        <Radio id={\`\${group}-mentions\`} name={group} value="mentions" />
-        <label htmlFor={\`\${group}-mentions\`} className="cursor-pointer">Mentions only</label>
-      </div>
-
-      <div className="flex items-center gap-2">
-        <Radio id={\`\${group}-none\`} name={group} value="none" />
-        <label htmlFor={\`\${group}-none\`} className="cursor-pointer">None</label>
-      </div>
-
-      <div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
-        <Radio id={\`\${group}-disabled\`} name={\`\${group}-disabled\`} disabled />
-        <label htmlFor={\`\${group}-disabled\`} className="cursor-not-allowed">Disabled example</label>
-      </div>
-    </fieldset>
+    <div className="space-y-2">
+      <RadioGroup
+        aria-labelledby={groupId}
+        name="no-label-demo"
+        defaultValue="demo 1"
+        orientation="horizontal"
+        className="inline-flex flex-row items-center gap-4"
+      >
+        <Radio
+          value="demo 1"
+          aria-label="Demo 1"
+          title="Demo 1"
+        />
+        <Radio
+          value="demo 2"
+          aria-label="Demo 2"
+          title="Demo 2"
+        />
+        <Radio
+          value="demo 3"
+          disabled
+          aria-label="Demo 3"
+          title="Demo 3"
+        />
+      </RadioGroup>
+    </div>
   );
 };
 `;

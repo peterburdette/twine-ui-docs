@@ -1,93 +1,81 @@
 'use client';
 
 import * as React from 'react';
-import { Radio } from 'twine-ui';
+import { Radio, RadioGroup, FormControlLabel } from 'twine-ui';
 
 export const RadioVariantsDemo: React.FC = () => {
   return (
     <div className="grid gap-6 md:grid-cols-2 md:gap-8 sm:max-w-2xl">
-      {/* Column A: Standard (no explicit ring) */}
+      {/* Column A: Standard */}
       <div className="space-y-2">
         <p className="text-sm font-medium">Standard</p>
-        <div className="grid gap-2 rounded-md border p-3">
-          <label className="flex items-center gap-2">
+        <RadioGroup
+          defaultValue="default-a"
+          className="grid gap-2 rounded-md border p-3"
+        >
+          <FormControlLabel label="Default">
             <Radio
-              name="v-default-a"
-              value="a"
+              value="default-a"
               variant="default"
-              defaultChecked
             />
-            <span>Default</span>
-          </label>
-          <label className="flex items-center gap-2">
+          </FormControlLabel>
+          <FormControlLabel label="Success">
             <Radio
-              name="v-success-a"
-              value="a"
+              value="success-a"
               variant="success"
             />
-            <span>Success</span>
-          </label>
-          <label className="flex items-center gap-2">
+          </FormControlLabel>
+          <FormControlLabel label="Warning">
             <Radio
-              name="v-warning-a"
-              value="a"
+              value="warning-a"
               variant="warning"
             />
-            <span>Warning</span>
-          </label>
-          <label className="flex items-center gap-2">
+          </FormControlLabel>
+          <FormControlLabel label="Error">
             <Radio
-              name="v-error-a"
-              value="a"
+              value="error-a"
               variant="error"
             />
-            <span>Error</span>
-          </label>
-        </div>
+          </FormControlLabel>
+        </RadioGroup>
       </div>
 
       {/* Column B: With focus ring */}
       <div className="space-y-2">
         <p className="text-sm font-medium">With focus ring</p>
-        <div className="grid gap-2 rounded-md border p-3">
-          <label className="flex items-center gap-2">
+        <RadioGroup
+          defaultValue="default-b"
+          className="grid gap-2 rounded-md border p-3"
+        >
+          <FormControlLabel label="Default">
             <Radio
-              name="v-default-b"
-              value="b"
+              value="default-b"
               variant="default"
               showFocusRing
-              defaultChecked
             />
-            <span>Default</span>
-          </label>
-          <label className="flex items-center gap-2">
+          </FormControlLabel>
+          <FormControlLabel label="Success">
             <Radio
-              name="v-success-b"
-              value="b"
+              value="success-b"
               variant="success"
               showFocusRing
             />
-            <span>Success</span>
-          </label>
-          <label className="flex items-center gap-2">
+          </FormControlLabel>
+          <FormControlLabel label="Warning">
             <Radio
-              name="v-warning-b"
-              value="b"
+              value="warning-b"
               variant="warning"
               showFocusRing
             />
-            <span>Warning</span>
-          </label>
-          <label className="flex items-center gap-2">
+          </FormControlLabel>
+          <FormControlLabel label="Error">
             <Radio
-              name="v-error-b"
-              value="b"
+              value="error-b"
               variant="error"
               showFocusRing
             />
-            <span>Error</span>
-          </label>
-        </div>
+          </FormControlLabel>
+        </RadioGroup>
         <p className="text-xs text-muted-foreground">
           Tab to a radio and use arrow keys to see the focus ring in action.
         </p>
