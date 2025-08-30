@@ -6,9 +6,6 @@ import {
   Search,
   X,
   Mail,
-  Lock,
-  Eye,
-  EyeOff,
   CheckCircle2,
   AlertCircle,
   Loader2,
@@ -17,9 +14,6 @@ import {
 export const InputWithIconDemo: React.FC = () => {
   const [email, setEmail] = React.useState('');
   const isValidEmail = email.includes('@');
-
-  const [pwdVisible, setPwdVisible] = React.useState(false);
-
   const [loading, setLoading] = React.useState(false);
 
   return (
@@ -62,25 +56,7 @@ export const InputWithIconDemo: React.FC = () => {
         error={email && !isValidEmail ? 'Enter a valid email.' : undefined}
       />
 
-      {/* 5) Password with Show/Hide inline button */}
-      <Input
-        label="Password"
-        type={pwdVisible ? 'text' : 'password'}
-        placeholder="••••••••"
-        endIcon={<Lock className="h-5 w-5" />}
-        inlineButton={{
-          label: pwdVisible ? 'Hide' : 'Show',
-          icon: pwdVisible ? (
-            <EyeOff className="h-5 w-5" />
-          ) : (
-            <Eye className="h-5 w-5" />
-          ),
-          onClick: () => setPwdVisible((v) => !v),
-          variant: 'ghost',
-        }}
-      />
-
-      {/* 6) Loading state as an icon */}
+      {/* 5) Loading state as an icon */}
       <Input
         label="Lookup"
         placeholder="Focus to simulate lookup…"
@@ -99,5 +75,4 @@ export const InputWithIconDemo: React.FC = () => {
     </div>
   );
 };
-
 `;
