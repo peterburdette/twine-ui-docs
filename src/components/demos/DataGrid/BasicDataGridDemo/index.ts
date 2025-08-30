@@ -1,1 +1,0 @@
-export { BasicDataGridDemo } from './BasicDataGridDemo';

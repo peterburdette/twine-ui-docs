@@ -1,1 +1,0 @@
-export { SortingFilteringDemo } from './SortingFilteringDemo';

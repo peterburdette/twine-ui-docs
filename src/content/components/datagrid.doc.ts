@@ -1,33 +1,99 @@
 import type { DocPage } from '../schema';
-import { BasicDataGridDemo } from '@/components/demos/DataGrid/BasicDataGridDemo';
-import { SortingFilteringDemo } from '@/components/demos/DataGrid/SortingFilteringDemo';
-import { EditableCellsDemo } from '@/components/demos/DataGrid/EditableCellsDemo';
+import {
+  DataGridBasicDemo,
+  DataGridSortingFilteringDemo,
+  DataGridExportDemo,
+  DataGridEditingDemo,
+  DataGridColumnDragResizeDemo,
+  DataGridPlaygroundDemo,
+} from '@/components/demos/DataGrid';
+import {
+  DataGridBasicDemoCode,
+  DataGridSortingFilteringDemoCode,
+  DataGridExportDemoCode,
+  DataGridEditingDemoCode,
+  DataGridColumnDragResizeDemoCode,
+} from '@/components/demos/DataGrid/';
+import { dataGridApi } from '../api/DataGrid.api';
+import { dataGridA11y } from '../a11y/DataGrid.a11y';
 
 export const doc: DocPage = {
-  slug: 'datagrid',
+  slug: 'data-grid',
   title: 'Data Grid',
-  description:
-    'A fast, flexible grid with sorting, filtering, selection, pagination, and editable cells.',
-  category: 'DataGrid',
   toc: true,
-  previews: [
+  tocTitle: 'Introduction',
+  description:
+    'A fast, accessible data grid with sorting, filtering, pagination, selection, inline editing, column reordering, and export — built with Tailwind CSS.',
+  category: 'Data Display',
+  sections: [
     {
-      id: 'basic',
-      title: 'Basic grid',
-      description: 'Minimal setup with rows and columns.',
-      component: BasicDataGridDemo,
+      kind: 'usage',
+      id: 'usage',
+      title: 'Usage',
+      previews: [
+        {
+          id: 'basic',
+          title: 'Basic Usage',
+          description:
+            'Render rows with common column types. Enable checkbox selection and paging.',
+          component: DataGridBasicDemo,
+          code: DataGridBasicDemoCode,
+        },
+        {
+          id: 'sorting-filtering',
+          title: 'Sorting & Filtering',
+          description:
+            'Enable column sorting and per-column filters for quick narrowing.',
+          component: DataGridSortingFilteringDemo,
+          code: DataGridSortingFilteringDemoCode,
+        },
+        {
+          id: 'export',
+          title: 'Export',
+          description: 'Export rows to CSV or JSON using the toolbar menu.',
+          component: DataGridExportDemo,
+          code: DataGridExportDemoCode,
+        },
+        {
+          id: 'column-drag-resize',
+          title: 'Column Drag & Resize',
+          description:
+            'Drag headers to reorder columns and resize via the right-edge handle.',
+          component: DataGridColumnDragResizeDemo,
+          code: DataGridColumnDragResizeDemoCode,
+        },
+        {
+          id: 'editing',
+          title: 'Inline Editing',
+          description:
+            'Double-click a cell in an editable column to edit. Press Enter to save, Esc to cancel.',
+          component: DataGridEditingDemo,
+          code: DataGridEditingDemoCode,
+        },
+        {
+          id: 'playground',
+          title: 'Playground',
+          description:
+            'Flip checkboxes and selects to tweak selection, toolbar sections, density, and column features live.',
+          component: DataGridPlaygroundDemo,
+        },
+      ],
     },
     {
-      id: 'sort-filter',
-      title: 'Sorting & filtering',
-      description: 'Column sorting and simple filter UI.',
-      component: SortingFilteringDemo,
+      kind: 'a11y',
+      id: 'accessibility',
+      title: 'Accessibility',
+      description:
+        'Keyboard navigation (arrow keys, Home/End, PageUp/PageDown), focus management, roles, and header associations for assistive tech.',
+      a11y: dataGridA11y,
     },
     {
-      id: 'editable',
-      title: 'Editable cells',
-      description: 'Inline cell editing with a custom render.',
-      component: EditableCellsDemo,
+      kind: 'api',
+      id: 'api',
+      title: 'API',
+      description:
+        'Props, events, and types for integrating the DataGrid component.',
+      api: dataGridApi,
     },
   ],
 };
