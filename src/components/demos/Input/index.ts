@@ -1,11 +1,13 @@
-export { InputBasicDemo } from './InputBasicDemo';
-export { InputControlledDemo } from './InputControlledDemo';
-export { InputSizesDemo } from './InputSizesDemo';
-export { InputVariantsDemo } from './InputVariantsDemo';
-export { InputWithIconDemo } from './InputWithIconDemo';
+export * from './InputBasicDemo';
+export * from './InputControlledDemo';
+export * from './InputSizesDemo';
+export * from './InputVariantsDemo';
+export * from './InputWithIconDemo';
+export * from './InputAdornmentsDemo';
 
-export { InputBasicDemoCode } from './InputBasicDemo.code';
-export { InputControlledDemoCode } from './InputControlledDemo.code';
-export { InputSizesDemoCode } from './InputSizesDemo.code';
-export { InputVariantsDemoCode } from './InputVariantsDemo.code';
-export { InputWithIconDemoCode } from './InputWithIconDemo.code';
+export * from './InputBasicDemo.code';
+export * from './InputControlledDemo.code';
+export * from './InputSizesDemo.code';
+export * from './InputVariantsDemo.code';
+export * from './InputWithIconDemo.code';
+export * from './InputAdornmentsDemo.code';

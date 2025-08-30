@@ -5,6 +5,7 @@ import {
   InputSizesDemo,
   InputVariantsDemo,
   InputWithIconDemo,
+  InputAdornmentsDemo,
 } from '@/components/demos/Input';
 import {
   InputBasicDemoCode,
@@ -12,6 +13,7 @@ import {
   InputSizesDemoCode,
   InputVariantsDemoCode,
   InputWithIconDemoCode,
+  InputAdornmentsDemoCode,
 } from '@/components/demos/Input';
 import { inputApi } from '../api/Input.api';
 import { inputA11y } from '../a11y/Input.a11y';
@@ -69,6 +71,14 @@ export const doc: DocPage = {
             'Include icons inside the input for search, actions, or context cues.',
           component: InputWithIconDemo,
           code: InputWithIconDemoCode,
+        },
+        {
+          id: 'adornments',
+          title: 'Adornments',
+          description:
+            'Showcases start/end adornments, inline labels, inline add-ons, and fixed-width inline selects with truncation-safe triggers.',
+          component: InputAdornmentsDemo,
+          code: InputAdornmentsDemoCode,
         },
       ],
     },
