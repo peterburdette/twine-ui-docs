@@ -273,7 +273,7 @@ export const DataGridPlaygroundDemo: React.FC = () => {
         </FormControlLabel>
 
         <Button
-          variant="outline"
+          variant="outlined"
           onClick={resetAll}
           className="ml-auto inline-flex items-center rounded-md border px-3 py-1.5 text-sm hover:bg-gray-50"
           aria-label="Reset all settings to defaults"

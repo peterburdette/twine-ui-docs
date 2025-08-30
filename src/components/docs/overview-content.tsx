@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Button } from '@/components/ui/button';
+import { Button } from 'twine-ui';
 import {
   Card,
   CardContent,
@@ -209,10 +209,10 @@ function App() {
               <div className="flex flex-wrap gap-2 mb-4">
                 <Button size="sm">Primary</Button>
                 <Button
-                  variant="outline"
+                  variant="outlined"
                   size="sm"
                 >
-                  Outline
+                  Outlined
                 </Button>
                 <Button
                   variant="ghost"

@@ -6,7 +6,7 @@ export const ButtonBasicDemo: React.FC = () => {
     <div className="flex flex-wrap gap-2">
       <Button>Primary</Button>
       <Button variant="secondary">Secondary</Button>
-      <Button variant="outline">Outline</Button>
+      <Button variant="outlined">Outlined</Button>
       <Button variant="ghost">Ghost</Button>
     </div>
   );

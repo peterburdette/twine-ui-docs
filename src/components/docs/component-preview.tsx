@@ -106,7 +106,7 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
           >
             <Button
               size="icon"
-              variant="outline"
+              variant="outlined"
               onClick={handleShare}
               aria-label="Copy share link"
             >
@@ -125,7 +125,7 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
             >
               <Button
                 size="icon"
-                variant="outline"
+                variant="outlined"
                 onClick={() => setShowCode((p) => !p)}
                 aria-label={showCode ? 'Hide code' : 'Show code'}
               >

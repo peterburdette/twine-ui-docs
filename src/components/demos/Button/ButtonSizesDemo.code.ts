@@ -18,11 +18,11 @@ export const ButtonSizesDemo: React.FC = () => {
         <Button variant="secondary" size="lg">Large</Button>
       </div>
 
-      {/* Outline */}
+      {/* Outlined */}
       <div className="flex flex-wrap items-center gap-2">
-        <Button variant="outline" size="sm">Small</Button>
-        <Button variant="outline" size="md">Medium</Button>
-        <Button variant="outline" size="lg">Large</Button>
+        <Button variant="outlined" size="sm">Small</Button>
+        <Button variant="outlined" size="md">Medium</Button>
+        <Button variant="outlined" size="lg">Large</Button>
       </div>
 
       {/* Ghost */}

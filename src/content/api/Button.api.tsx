@@ -5,7 +5,7 @@ export const buttonApi: ApiSpec = {
   props: [
     {
       name: 'variant',
-      type: `'default' | 'outline' | 'ghost' | 'destructive' | 'secondary' | 'link' | 'success' | 'warning' | 'info' | 'subtle' | 'unstyled'`,
+      type: `'default' | 'outlined' | 'ghost' | 'destructive' | 'secondary' | 'link' | 'success' | 'warning' | 'info' | 'subtle' | 'unstyled'`,
       default: `'default'`,
       description:
         'Controls the visual style of the button. Variants communicate intent such as primary actions, secondary actions, warnings, or destructive actions.',

@@ -20,7 +20,7 @@ export const ButtonIconOnlyDemo: React.FC = () => {
       </Button>
       <Button
         size="icon"
-        variant="outline"
+        variant="outlined"
         aria-label="Close"
       >
         <Eye size={16} />

@@ -33,22 +33,22 @@ export const ButtonSizesDemo: React.FC = () => {
         </Button>
       </div>
 
-      {/* Outline */}
+      {/* Outlined */}
       <div className="flex flex-wrap items-center gap-2">
         <Button
-          variant="outline"
+          variant="outlined"
           size="sm"
         >
           Small
         </Button>
         <Button
-          variant="outline"
+          variant="outlined"
           size="md"
         >
           Medium
         </Button>
         <Button
-          variant="outline"
+          variant="outlined"
           size="lg"
         >
           Large

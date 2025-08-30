@@ -26,7 +26,7 @@ export const CardDemo = () => {
       <div className="flex gap-2">
         <Button size="sm">Action</Button>
         <Button
-          variant="outline"
+          variant="outlined"
           size="sm"
         >
           Cancel
