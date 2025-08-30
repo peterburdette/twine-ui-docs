@@ -5,7 +5,7 @@ import { Input } from 'twine-ui';
 
 export const InputVariantsDemo: React.FC = () => {
   return (
-    <div className="grid gap-6 md:grid-cols-2 md:gap-8">
+    <div className="grid gap-6 md:grid-cols-3 md:gap-8">
       {/* Standard */}
       <div className="grid gap-3">
         <Input
@@ -88,6 +88,52 @@ export const InputVariantsDemo: React.FC = () => {
           placeholder=" "
           variant="inset"
           error="Enter a value."
+        />
+      </div>
+
+      {/* Disabled states */}
+      <div className="grid gap-3">
+        <Input
+          label="Default (disabled)"
+          placeholder="Default variant"
+          variant="default"
+          disabled
+        />
+        <Input
+          label="Underline (disabled)"
+          placeholder="Underline variant"
+          variant="underline"
+          disabled
+        />
+        <Input
+          label="Filled (disabled)"
+          placeholder="Filled variant"
+          variant="filled"
+          disabled
+        />
+        <Input
+          label="Outlined (disabled)"
+          placeholder="Outlined variant"
+          variant="outlined"
+          disabled
+        />
+        <Input
+          label="Ghost (disabled)"
+          placeholder="Ghost variant"
+          variant="ghost"
+          disabled
+        />
+        <Input
+          label="Floating (disabled)"
+          placeholder=" "
+          variant="floating"
+          disabled
+        />
+        <Input
+          label="Inset (disabled)"
+          placeholder=" "
+          variant="inset"
+          disabled
         />
       </div>
     </div>
