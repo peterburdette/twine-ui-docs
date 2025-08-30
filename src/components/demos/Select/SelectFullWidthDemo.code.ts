@@ -25,5 +25,4 @@ export const SelectFullWidthDemo: React.FC = () => {
     </div>
   );
 };
-
 `;

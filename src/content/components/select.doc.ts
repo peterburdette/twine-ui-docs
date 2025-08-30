@@ -3,17 +3,17 @@ import {
   SelectBasicDemo,
   SelectControlledDemo,
   SelectSizesDemo,
-  SelectAutoWidthDemo,
   SelectFullWidthDemo,
   SelectVariantsDemo,
+  SelectFixedTriggerWidthDemo,
 } from '@/components/demos/Select';
 import {
   SelectBasicDemoCode,
   SelectControlledDemoCode,
   SelectSizesDemoCode,
-  SelectAutoWidthDemoCode,
   SelectFullWidthDemoCode,
   SelectVariantsDemoCode,
+  SelectFixedTriggerWidthDemoCode,
 } from '@/components/demos/Select';
 import { selectA11y } from '../a11y/Select.a11y';
 import { selectApi } from '../api/Select.api';
@@ -65,12 +65,12 @@ export const doc: DocPage = {
           code: SelectVariantsDemoCode,
         },
         {
-          id: 'auto-width',
-          title: 'Auto Width',
+          id: 'fixed-trigger-width',
+          title: 'Fixed Trigger Width',
           description:
-            'Shrink the trigger to fit its content using the `autoWidth` prop. Useful for compact UIs or inline forms.',
-          component: SelectAutoWidthDemo,
-          code: SelectAutoWidthDemoCode,
+            'Keep a compact trigger with caret-safe truncation using `fixedTriggerWidth` and `truncateTriggerLabel`. The menu still sizes to the longest option.',
+          component: SelectFixedTriggerWidthDemo,
+          code: SelectFixedTriggerWidthDemoCode,
         },
         {
           id: 'full-width',

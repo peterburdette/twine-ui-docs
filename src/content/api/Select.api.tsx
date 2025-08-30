@@ -69,6 +69,32 @@ export const selectApi: ApiSpec = {
       description: 'Expands the component to the width of its container.',
     },
     {
+      name: 'noMinWidth',
+      type: 'boolean',
+      default: 'false',
+      description:
+        'Removes the built-in `min-w-[120px]` on the trigger. Useful for very compact layouts or when pairing with `maxTriggerWidth`. Ignored when `fixedTriggerWidth` or `fullWidth` are set.',
+    },
+    {
+      name: 'fixedTriggerWidth',
+      type: 'number',
+      description:
+        'Fixes the trigger width (in px) and prevents it from expanding with content. Also sets `minWidth` to the same value. Recommended with `truncateTriggerLabel` for caret-safe truncation.',
+    },
+    {
+      name: 'maxTriggerWidth',
+      type: 'number',
+      description:
+        'Applies a `max-width` (in px) to the trigger so it can grow with content up to a cap, then ellipsize (use with `truncateTriggerLabel`). Ignored if `fixedTriggerWidth` is provided.',
+    },
+    {
+      name: 'truncateTriggerLabel',
+      type: 'boolean',
+      default: 'false',
+      description:
+        'Ellipsizes the selected option/placeholder inside the trigger. A reserved right padding ensures the text never underlaps the caret.',
+    },
+    {
       name: 'showFocusRing',
       type: 'boolean',
       default: 'false',
@@ -81,9 +107,16 @@ export const selectApi: ApiSpec = {
         'Control id used for the button (role="combobox") and for associating the visible label.',
     },
     {
+      name: 'containerClassName',
+      type: 'string',
+      description:
+        'Class name applied to the outer wrapper (around the trigger).',
+    },
+    {
       name: 'className',
       type: 'string',
-      description: 'Appended to the computed trigger class list for overrides.',
+      description:
+        'Class name appended to the computed trigger class list for overrides.',
     },
   ],
   notes: [
