@@ -39,7 +39,7 @@ export function OverviewContent() {
             </h1>
             <Badge variant="secondary">v1.0.0</Badge>
           </div>
-          <p className="text-lg sm:text-xl text-gray-600">
+          <p className="text-gray-600">
             A comprehensive collection of beautiful, accessible, and
             customizable components built with Tailwind CSS. Perfect for
             building modern web applications with consistent design patterns.

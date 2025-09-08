@@ -25,11 +25,16 @@ export function TableOfContents() {
 
   React.useEffect(() => {
     const collect = () => {
+      // Collect only headings with ids, and skip anything explicitly marked or nested under [data-toc-skip]
       const nodes = Array.from(
         document.querySelectorAll('h1[id], h2[id], h3[id]')
       ) as HTMLHeadingElement[];
 
-      const items: TocItem[] = nodes.map((h) => ({
+      const filtered = nodes.filter(
+        (h) => !h.hasAttribute('data-toc-skip') && !h.closest('[data-toc-skip]')
+      );
+
+      const items: TocItem[] = filtered.map((h) => ({
         id: h.id,
         title: (h.dataset.tocTitle || h.textContent || '').trim(),
         level: h.tagName === 'H1' ? 1 : h.tagName === 'H2' ? 2 : 3,
@@ -43,7 +48,6 @@ export function TableOfContents() {
         hash && items.some((i) => i.id === hash) ? hash : items[0]?.id;
       if (initialId) {
         setActiveSection(initialId);
-        // keep URL & sidebars in sync on first load too
         setHash(initialId);
       }
     };
@@ -113,7 +117,7 @@ export function TableOfContents() {
         el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
       window.scrollTo({ top, behavior: 'smooth' });
       setActiveSection(id);
-      setHash(id); // keep URL + sidebars in sync
+      setHash(id);
 
       setTimeout(() => {
         lockUntilRef.current = 0;

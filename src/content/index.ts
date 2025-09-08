@@ -9,6 +9,8 @@ export const registry = {
   select: () => import('./components/select.doc').then((m) => m.doc as DocPage),
   datagrid: () =>
     import('./components/datagrid.doc').then((m) => m.doc as DocPage),
+  card: () =>
+    import('./components/card.doc').then((m) => m.doc as DocPage),
 } as const;
 
 export type DocSlug = keyof typeof registry;

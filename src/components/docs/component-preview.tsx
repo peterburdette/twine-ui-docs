@@ -10,6 +10,8 @@ type ComponentPreviewProps = {
   id?: string;
   title?: string;
   description?: string;
+  showTitle?: boolean;
+  tocSkip?: boolean;
   className?: string;
   padded?: boolean;
   children?: React.ReactNode;
@@ -27,6 +29,8 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
   id,
   title,
   description,
+  showTitle = true,
+  tocSkip = false,
   className = '',
   padded = true,
   children,
@@ -69,44 +73,50 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
   };
 
   const handleShare = () => {
-    const link = `${window.location.origin}${window.location.pathname}#${headingId}`;
+    const base = `${window.location.origin}${window.location.pathname}`;
+    const link = headingId ? `${base}#${headingId}` : base;
     handleCopy(link, 'link');
   };
 
   return (
     <section
       className={`mb-8 ${className}`}
-      aria-labelledby={headingId}
+      aria-labelledby={showTitle && title && headingId ? headingId : undefined}
     >
-      {(title || description) && (
-        <header className="mb-4">
-          {title && (
+      {(showTitle ? !!title : !!description) && (
+        <header className="mb-3">
+          {showTitle && title ? (
             <h3
               id={headingId}
               className="text-lg font-semibold scroll-mt-16"
+              data-toc-skip={tocSkip ? '' : undefined}
             >
               {title}
             </h3>
-          )}
-          {description && (
-            <p className="mt-1 text-md text-gray-600 text-muted-foreground">
-              {description}
-            </p>
-          )}
+          ) : headingId ? (
+            <span
+              id={headingId}
+              aria-hidden="true"
+            />
+          ) : null}
+
+          {description ? (
+            <p className="mt-1 text-md text-gray-600">{description}</p>
+          ) : null}
         </header>
       )}
 
-      {/* Container for toolbar + demo + code */}
-      <div className="rounded-md border overflow-hidden">
-        {/* Toolbar */}
-        <div className="flex items-center justify-end gap-2 bg-gray-100 border-b px-3 py-2">
+      {/* Bounded container (no shadow), with a slim control row that never overlays content */}
+      <div className="relative rounded-lg overflow-hidden border border-gray-200 bg-white">
+        {/* Control row (always visible, minimal chrome) */}
+        <div className="flex items-center justify-end gap-1 px-2 py-1 border-b border-gray-100 bg-gray-50">
           <Tooltip
             placement="bottom"
-            content={copied === 'link' ? 'Link copied' : 'Copy share link'}
+            content={copied === 'link' ? 'Link copied' : 'Copy link'}
           >
             <Button
               size="icon"
-              variant="outlined"
+              variant="ghost"
               onClick={handleShare}
               aria-label="Copy share link"
             >
@@ -125,7 +135,8 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
             >
               <Button
                 size="icon"
-                variant="outlined"
+                variant="ghost"
+                aria-expanded={showCode}
                 onClick={() => setShowCode((p) => !p)}
                 aria-label={showCode ? 'Hide code' : 'Show code'}
               >
@@ -135,11 +146,11 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
           )}
         </div>
 
-        {/* Demo */}
+        {/* Demo area: centered content, optional padding */}
         <div
-          className={`flex items-center justify-center min-h-[120px] ${
+          className={`flex min-h-[120px] items-center justify-center ${
             padded ? 'p-6' : ''
-          } bg-white`}
+          }`}
         >
           {children ?? (
             <div className="flex items-center justify-center text-gray-500">
@@ -148,7 +159,7 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
           )}
         </div>
 
-        {/* Code */}
+        {/* Code panel inside container, separated by a thin border */}
         {code && (
           <div
             className="overflow-hidden transition-[max-height] duration-200 ease-out"
@@ -159,13 +170,13 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
               ref={contentRef}
               className="relative bg-neutral-900 text-neutral-100"
             >
-              {/* Copy button (inside code) */}
+              {/* Copy button inside code block */}
               <button
                 type="button"
                 onClick={() => handleCopy(code!, 'code')}
-                className="absolute top-3 right-3 inline-flex items-center gap-1.5 rounded-md p-2
+                className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-md p-2
                   bg-white/10 text-white backdrop-blur-sm ring-1 ring-white/20
-                  opacity-70 hover:opacity-100 focus-visible:opacity-100 transition-opacity"
+                  opacity-80 hover:opacity-100 focus-visible:opacity-100 transition-opacity"
                 aria-label="Copy code"
               >
                 {copied === 'code' ? (
