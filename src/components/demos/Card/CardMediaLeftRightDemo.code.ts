@@ -44,7 +44,7 @@ export const CardMediaLeftRightDemo: React.FC = () => {
           <CardContent>
             <p className="text-sm text-gray-700">
               In horizontal layouts, side media can span the card height. Use{' '}
-              <code>ratio="auto"</code> and stretch the wrapper.
+              <code>ratio=&quot;auto&quot;</code> and stretch the wrapper.
             </p>
           </CardContent>
           <CardActions
