@@ -1,12 +1,17 @@
 'use client';
 
 import * as React from 'react';
+import dynamic from 'next/dynamic';
 import { Button, Tooltip } from 'twine-ui';
 import { Code as CodeIcon, Copy, Check, Share2 } from 'lucide-react';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { slugify } from '@/lib/utils';
+import { useClipboard } from '@/hooks/useClipboard';
+import { useAutoHeight } from '@/hooks/useAutoHeight';
 
-type ComponentPreviewProps = {
+// Lazy-load CodeBlock to keep the initial docs bundle lean
+const CodeBlock = dynamic(() => import('./CodeBlock'), { ssr: false });
+
+export type ComponentPreviewProps = {
   id?: string;
   title?: string;
   description?: string;
@@ -16,14 +21,8 @@ type ComponentPreviewProps = {
   padded?: boolean;
   children?: React.ReactNode;
   code?: string;
+  language?: string;
 };
-
-const slugify = (s: string) =>
-  s
-    .toLowerCase()
-    .trim()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/\s+/g, '-');
 
 const ComponentPreview: React.FC<ComponentPreviewProps> = ({
   id,
@@ -35,48 +34,61 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
   padded = true,
   children,
   code,
+  language = 'tsx',
 }) => {
   const [showCode, setShowCode] = React.useState(false);
-  const [copied, setCopied] = React.useState<string | null>(null);
-  const [maxHeight, setMaxHeight] = React.useState<number>(0);
 
-  const contentRef = React.useRef<HTMLDivElement>(null);
-  const headingId = id ?? (title ? slugify(title) : undefined);
+  const headingId = React.useMemo(
+    () => id ?? (title ? slugify(title) : undefined),
+    [id, title]
+  );
 
-  const recalc = React.useCallback(() => {
-    if (!contentRef.current) return;
-    const h = contentRef.current.scrollHeight;
-    setMaxHeight(showCode ? h : 0);
-  }, [showCode]);
+  const { copiedKey, copy } = useClipboard({ timeoutMs: 1200 });
+  const { ref: codeRef, maxHeight } = useAutoHeight(showCode);
 
-  React.useEffect(() => {
-    recalc();
-  }, [recalc, code]);
-
-  React.useEffect(() => {
-    const ro = new ResizeObserver(() => recalc());
-    if (contentRef.current) ro.observe(contentRef.current);
-    const onWinResize = () => recalc();
-    window.addEventListener('resize', onWinResize);
-    return () => {
-      ro.disconnect();
-      window.removeEventListener('resize', onWinResize);
-    };
-  }, [recalc]);
-
-  const handleCopy = async (text: string, type: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(type);
-      setTimeout(() => setCopied(null), 1200);
-    } catch {}
-  };
-
-  const handleShare = () => {
+  const handleShare = React.useCallback(async () => {
     const base = `${window.location.origin}${window.location.pathname}`;
     const link = headingId ? `${base}#${headingId}` : base;
-    handleCopy(link, 'link');
-  };
+    const titleText = title ?? 'Component';
+
+    // Narrow Web Share API for TS
+    const nav = navigator as Navigator & {
+      share?: (data: ShareData) => Promise<void>;
+      canShare?: (data?: ShareData) => boolean;
+    };
+
+    const shareData: ShareData = { title: titleText, url: link };
+
+    if (
+      typeof nav.share === 'function' &&
+      (!nav.canShare || nav.canShare(shareData))
+    ) {
+      try {
+        await nav.share(shareData);
+        return;
+      } catch (err: unknown) {
+        const name =
+          typeof err === 'object' && err !== null && 'name' in err
+            ? String(err.name)
+            : '';
+        const message =
+          typeof err === 'object' && err !== null && 'message' in err
+            ? String(err.message)
+            : String(err);
+
+        const userCancelled = name === 'AbortError' || /cancel/i.test(message);
+
+        if (userCancelled) return;
+
+        await copy(link, 'link');
+        return;
+      }
+    }
+
+    await copy(link, 'link');
+  }, [headingId, title, copy]);
+
+  const codeRegionId = headingId ? `${headingId}__code` : undefined;
 
   return (
     <section
@@ -90,6 +102,7 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
               id={headingId}
               className="text-lg font-semibold scroll-mt-16"
               data-toc-skip={tocSkip ? '' : undefined}
+              data-toc-title={title}
             >
               {title}
             </h3>
@@ -106,13 +119,11 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
         </header>
       )}
 
-      {/* Bounded container (no shadow), with a slim control row that never overlays content */}
       <div className="relative rounded-lg overflow-hidden border border-gray-200 bg-white">
-        {/* Control row (always visible, minimal chrome) */}
         <div className="flex items-center justify-end gap-1 px-2 py-1 border-b border-gray-100 bg-gray-50">
           <Tooltip
             placement="bottom"
-            content={copied === 'link' ? 'Link copied' : 'Copy link'}
+            content={copiedKey === 'link' ? 'Link copied' : 'Copy link'}
           >
             <Button
               size="icon"
@@ -120,7 +131,7 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
               onClick={handleShare}
               aria-label="Copy share link"
             >
-              {copied === 'link' ? (
+              {copiedKey === 'link' ? (
                 <Check className="h-4 w-4" />
               ) : (
                 <Share2 className="h-4 w-4" />
@@ -137,6 +148,7 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
                 size="icon"
                 variant="ghost"
                 aria-expanded={showCode}
+                aria-controls={codeRegionId}
                 onClick={() => setShowCode((p) => !p)}
                 aria-label={showCode ? 'Hide code' : 'Show code'}
               >
@@ -146,7 +158,6 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
           )}
         </div>
 
-        {/* Demo area: centered content, optional padding */}
         <div
           className={`flex min-h-[120px] items-center justify-center ${
             padded ? 'p-6' : ''
@@ -159,27 +170,26 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
           )}
         </div>
 
-        {/* Code panel inside container, separated by a thin border */}
         {code && (
           <div
-            className="overflow-hidden transition-[max-height] duration-200 ease-out"
+            id={codeRegionId}
+            className="overflow-hidden transition-[max-height] duration-200 ease-out motion-reduce:transition-none"
             style={{ maxHeight }}
             aria-hidden={!showCode}
           >
             <div
-              ref={contentRef}
+              ref={codeRef}
               className="relative bg-neutral-900 text-neutral-100"
             >
-              {/* Copy button inside code block */}
               <button
                 type="button"
-                onClick={() => handleCopy(code!, 'code')}
+                onClick={() => copy(code, 'code')}
                 className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-md p-2
                   bg-white/10 text-white backdrop-blur-sm ring-1 ring-white/20
                   opacity-80 hover:opacity-100 focus-visible:opacity-100 transition-opacity"
                 aria-label="Copy code"
               >
-                {copied === 'code' ? (
+                {copiedKey === 'code' ? (
                   <Check className="h-5 w-5" />
                 ) : (
                   <Copy className="h-5 w-5" />
@@ -187,19 +197,10 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
               </button>
 
               <div className="max-h-[450px] overflow-y-auto">
-                <SyntaxHighlighter
-                  language="tsx"
-                  style={vscDarkPlus}
-                  customStyle={{
-                    margin: 0,
-                    borderRadius: 0,
-                    background: 'transparent',
-                    padding: '1rem',
-                  }}
-                  showLineNumbers={false}
-                >
-                  {code}
-                </SyntaxHighlighter>
+                <CodeBlock
+                  code={code}
+                  language={language}
+                />
               </div>
             </div>
           </div>
