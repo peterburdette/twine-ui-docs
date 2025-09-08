@@ -212,7 +212,7 @@ export const navigationData: NavigationSection[] = [
     title: 'Data Components',
     items: [
       doc('Data Grid', 'datagrid', Table),
-      route('Card', '/card', CardIcon),
+      doc('Card', 'card', CardIcon),
       route('Modal', '/modal', ModalIcon),
     ],
   },
