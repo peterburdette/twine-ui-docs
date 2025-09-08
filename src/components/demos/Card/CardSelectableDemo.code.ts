@@ -47,7 +47,6 @@ export const CardSelectableDemo: React.FC = () => {
             radius="xl"
             padding="md"
             className={[
-              'cursor-pointer transition h-full',
               isSelected
                 ? 'ring-2 ring-blue-500 border-blue-300'
                 : 'hover:border-gray-300',
