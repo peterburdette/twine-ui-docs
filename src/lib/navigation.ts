@@ -204,8 +204,15 @@ export const navigationData: NavigationSection[] = [
       doc('Checkbox', 'checkbox', SquareCheck),
       doc('Radio', 'radio', CircleDot),
       doc('Select', 'select', SquareChevronDown),
+    ],
+  },
+
+  {
+    id: 'date-time',
+    title: 'Date & Time Components',
+    items: [
       doc('Date Picker', 'date-picker', Calendar),
-      route('Time Picker', '/time-picker', Clock),
+      doc('Time Picker', 'time-picker', Clock),
       doc('Date Time Picker', 'date-time-picker', CalendarClock),
       route('Range Picker', '/range-picker', CalendarRange),
     ],

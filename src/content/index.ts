@@ -11,6 +11,8 @@ export const registry = {
     import('./components/datagrid.doc').then((m) => m.doc as DocPage),
   'date-picker': () =>
     import('./components/date-picker.doc').then((m) => m.doc as DocPage),
+  'time-picker': () =>
+    import('./components/time-picker.doc').then((m) => m.doc as DocPage),
   'date-time-picker': () =>
     import('./components/date-time-picker.doc').then((m) => m.doc as DocPage),
   card: () => import('./components/card.doc').then((m) => m.doc as DocPage),
