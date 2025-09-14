@@ -5,17 +5,24 @@ export const buttonApi: ApiSpec = {
   props: [
     {
       name: 'variant',
-      type: `'default' | 'outlined' | 'ghost' | 'destructive' | 'secondary' | 'link' | 'success' | 'warning' | 'info' | 'subtle' | 'unstyled'`,
+      type: `'default' | 'outlined' | 'ghost' | 'destructive' | 'secondary' | 'link' | 'success' | 'warning' | 'info' | 'unstyled'`,
       default: `'default'`,
       description:
         'Controls the visual style of the button. Variants communicate intent such as primary actions, secondary actions, warnings, or destructive actions.',
     },
     {
       name: 'size',
-      type: `'sm' | 'md' | 'lg' | 'icon'`,
+      type: `'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'icon'`,
       default: `'md'`,
       description:
-        'Defines the size of the button. `sm`, `md`, and `lg` control padding and font size, while `icon` produces a compact square button for icon-only usage.',
+        'Defines the size of the button. Text sizes (xs–xl) adjust padding and font size; `icon` renders a square icon-only button. Icon and spinner sizes scale automatically with the chosen size.',
+    },
+    {
+      name: 'radius',
+      type: `'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full' | number | string`,
+      default: `'md'`,
+      description:
+        'Corner radius. Use Tailwind-like tokens for common shapes or pass a custom CSS length (e.g., 10, "12px", "1rem", "50%") for full control. `full` creates a pill/circle where appropriate.',
     },
     {
       name: 'fullWidth',
@@ -29,39 +36,39 @@ export const buttonApi: ApiSpec = {
       type: 'boolean',
       default: 'false',
       description:
-        'Displays a spinner inside the button and disables interaction while true.',
+        'Shows a spinner (aria-hidden) and disables interaction while true. Also sets `aria-busy` for assistive technologies.',
     },
     {
       name: 'startIcon',
       type: 'React.ReactNode',
       description:
-        'An optional icon displayed before the button label. Replaced by a spinner when `loading` is true.',
+        'Optional icon before the label. Icons are decorative by default (aria-hidden) and automatically sized to match the button size.',
     },
     {
       name: 'endIcon',
       type: 'React.ReactNode',
       description:
-        'An optional icon displayed after the button label. Replaced by a spinner when `loading` is true.',
+        'Optional icon after the label. Icons are decorative by default (aria-hidden) and automatically sized to match the button size.',
     },
     {
       name: 'showFocusRing',
       type: 'boolean',
       default: 'false',
       description:
-        'Adds a visible focus ring that meets WCAG contrast requirements when the button is focused.',
+        'Adds a visible focus ring that meets WCAG 2.1 AA when the button is focused.',
     },
     {
       name: 'asChild',
       type: 'boolean',
       default: 'false',
       description:
-        'Renders the button styles on a child element instead of a native <button>. Useful for integrating with routing or other custom components.',
+        'Render styles on a child element instead of a native <button>. Useful for integrating with routing or custom components.',
     },
     {
       name: 'disabled',
       type: 'boolean',
       description:
-        'Disables the button, preventing all interaction. Automatically true when `loading` is set.',
+        'Disables the button, preventing interaction. Automatically true when `loading` is set.',
     },
     {
       name: 'type',
@@ -74,24 +81,24 @@ export const buttonApi: ApiSpec = {
       name: 'className',
       type: 'string',
       description:
-        'Appended to the computed class list for styling overrides or custom utilities.',
+        'Appended to the computed class list for styling overrides or utilities.',
     },
     {
       name: 'onClick',
       type: '(e: React.MouseEvent<HTMLButtonElement>) => void',
       description:
-        'Handler fired when the button is clicked, matching the native button click event.',
+        'Fired when the button is clicked, matching the native button click event.',
     },
     {
       name: 'children',
       type: 'React.ReactNode',
       description:
-        'The button label or content. Required unless using the `icon` size, in which case an `aria-label` should be provided.',
+        'The button label or content. For icon-only usage (`size="icon"`), provide an accessible name via `aria-label`.',
     },
   ],
-  //   notes: [
-  //     'Button extends React.ButtonHTMLAttributes<HTMLButtonElement>, so all native button attributes are supported.',
-  //     'The component forwards its ref to the underlying <button> element.',
-  //     'When `loading` is true, the spinner is rendered and `aria-busy="true"` is applied automatically.',
-  //   ],
+  notes: [
+    'Button extends React.ButtonHTMLAttributes<HTMLButtonElement>, so all native button attributes are supported.',
+    'The component forwards its ref to the underlying <button> element.',
+    'When `loading` is true, the spinner is rendered and `aria-busy="true"` is applied automatically.',
+  ],
 };
