@@ -5,15 +5,32 @@ export const datePickerApi: ApiSpec = {
   props: [
     {
       name: 'value',
-      type: 'Date | undefined',
+      type: '{ start?: Date; end?: Date } | undefined',
       default: 'undefined',
-      description: 'Controlled value for the picker.',
+      description:
+        'Controlled value. For single-date usage, provide only `start`. For ranges, provide both `start` and `end`.',
     },
     {
       name: 'onChange',
-      type: '(date: Date | undefined) => void',
+      type: '(range: { start?: Date; end?: Date }) => void',
       default: '—',
-      description: 'Called when a date is selected or cleared.',
+      description:
+        'Called when the selection changes. Emits a DateRange-like object with `start` and optional `end`.',
+    },
+
+    {
+      name: 'enableRange',
+      type: 'boolean',
+      default: 'false',
+      description:
+        'Enable single-field range selection (input shows "Start – End"). The input is read-only in this mode; selection happens via the calendar.',
+    },
+    {
+      name: 'enableMultiInputRange',
+      type: 'boolean',
+      default: 'false',
+      description:
+        'Enable dual-input range selection (separate Start/End inputs). If both this and `enableRange` are true, the dual-input UI takes precedence.',
     },
 
     {
@@ -21,33 +38,35 @@ export const datePickerApi: ApiSpec = {
       type: 'string',
       default: '"MMM dd, yyyy"',
       description:
-        'Format pattern used for input display and parsing (adapter-dependent tokens).',
+        'Format pattern used for input display and parsing (adapter-dependent tokens). In range mode, both ends use this format.',
     },
     {
       name: 'placeholder',
       type: 'string',
       default: '"Select date"',
       description:
-        'Input placeholder. For "floating"/"inset" a single-space placeholder may be injected to enable :placeholder-shown.',
+        'Input placeholder. When `enableRange` is true (single-field range), the placeholder effectively communicates selecting a date range. For "floating"/"inset" a single-space placeholder may be injected to enable :placeholder-shown.',
     },
 
     {
       name: 'disabled',
       type: 'boolean',
       default: 'false',
-      description: 'Disable the input & trigger.',
+      description: 'Disable the input(s) & trigger.',
     },
     {
       name: 'minDate',
       type: 'Date',
       default: '—',
-      description: 'Earliest selectable date (inclusive).',
+      description:
+        'Earliest selectable date (inclusive). Applied to both start and end.',
     },
     {
       name: 'maxDate',
       type: 'Date',
       default: '—',
-      description: 'Latest selectable date (inclusive).',
+      description:
+        'Latest selectable date (inclusive). Applied to both start and end.',
     },
     {
       name: 'disabledDates',
@@ -61,7 +80,7 @@ export const datePickerApi: ApiSpec = {
       type: 'string',
       default: '—',
       description:
-        'Visible label. For "floating"/"inset", this renders inside the field.',
+        'Visible label. For "floating"/"inset", this renders inside the field. In dual-input mode, the internal labels are suffixed with "(start)" and "(end)".',
     },
     {
       name: 'error',
@@ -88,7 +107,7 @@ export const datePickerApi: ApiSpec = {
       type: '"xs" | "sm" | "md" | "lg" | "xl"',
       default: '"md"',
       description:
-        'Visual size for the input. Internal controls map to nearest supported size.',
+        'Visual size for the input(s). Internal controls map to the nearest supported size.',
     },
     {
       name: 'variant',
@@ -142,14 +161,15 @@ export const datePickerApi: ApiSpec = {
       name: 'enableQuickActions',
       type: 'boolean',
       default: 'true',
-      description: 'Show the Today / Clear row at the bottom.',
+      description:
+        'Show the Today / Clear row at the bottom. In range mode, Today sets both start and end to today.',
     },
     {
       name: 'readOnly',
       type: 'boolean',
       default: 'false',
       description:
-        'Make the input readOnly (disable typing; calendar UI still works).',
+        'Make the input readOnly (disable typing). Note: single-field range mode is always read-only.',
     },
     {
       name: 'ariaLabel',
@@ -167,8 +187,9 @@ export const datePickerApi: ApiSpec = {
     },
   ],
   notes: [
-    'The component accepts and emits plain JavaScript Date objects.',
-    'If you need a default value, pass a stable Date (e.g., from props or server) or keep `deferInitialRender` enabled to avoid hydration mismatches.',
+    'The component accepts and emits plain JavaScript Date objects via a `{ start?, end? }` shape.',
+    'For single-date selection, use `{ start: Date }` and leave `end` unset.',
+    'If both `enableRange` and `enableMultiInputRange` are true, the dual-input UI is used.',
     'Disabled dates are non-interactive (no hover cursor), non-focusable, and carry aria-disabled for assistive tech.',
     'Format tokens depend on the adapter in use (e.g., Luxon vs date-fns tokens).',
   ],

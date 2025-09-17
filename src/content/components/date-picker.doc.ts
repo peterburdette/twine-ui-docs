@@ -5,6 +5,8 @@ import {
   DatePickerMinMaxDisabledDemo,
   DatePickerVariantsDemo,
   DatePickerSizesDemo,
+  DatePickerRangeBasicDemo,
+  DatePickerRangeMultiDemo,
 } from '@/components/demos/DatePicker';
 
 import {
@@ -12,6 +14,8 @@ import {
   DatePickerMinMaxDisabledDemoCode,
   DatePickerVariantsDemoCode,
   DatePickerSizesDemoCode,
+  DatePickerRangeBasicDemoCode,
+  DatePickerRangeMultiDemoCode,
 } from '@/components/demos/DatePicker';
 
 import { datePickerA11y } from '../a11y/DatePicker.a11y';
@@ -61,6 +65,22 @@ export const doc: DocPage = {
           description: 'Choose compact or spacious input sizes (xs–xl).',
           component: DatePickerSizesDemo,
           code: DatePickerSizesDemoCode,
+        },
+        {
+          id: 'range-single',
+          title: 'Range Single Field',
+          description:
+            'Pick a start and end date in a single input with hover preview.',
+          component: DatePickerRangeBasicDemo,
+          code: DatePickerRangeBasicDemoCode,
+        },
+        {
+          id: 'range-multi',
+          title: 'Range Multi Input',
+          description:
+            'Start/End inputs tied to one calendar; both accept free text.',
+          component: DatePickerRangeMultiDemo,
+          code: DatePickerRangeMultiDemoCode,
         },
       ],
     },
