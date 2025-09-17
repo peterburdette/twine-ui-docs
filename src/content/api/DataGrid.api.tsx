@@ -62,12 +62,12 @@ export const dataGridApi: ApiSpec = {
 
     {
       name: 'onSortModelChange',
-      type: '(model: { field: string; sort: "asc" | "desc" }[]) => void',
+      type: 'SortModel[]',
       description: 'Fires when sorting changes.',
     },
     {
       name: 'onFilterModelChange',
-      type: '(rules: any) => void',
+      type: '(rules: FilterRule[]) => void',
       description: 'Fires when filter rules change.',
     },
 
@@ -84,23 +84,24 @@ export const dataGridApi: ApiSpec = {
       description: 'Drag headers to reorder columns.',
     },
     {
-      name: 'disableColumnResize',
+      name: 'enableColumnResize',
       type: 'boolean',
       default: 'false',
-      description: 'Disable manual column resizing from the right edge.',
+      description: 'Enable manual column resizing from the right edge.',
     },
 
     {
-      name: 'hideToolbar',
+      name: 'showToolbar',
       type: 'boolean',
       default: 'false',
-      description: 'Hide the built-in toolbar.',
+      description:
+        'Render the built-in toolbar (search, filters, export, columns controls).',
     },
     {
-      name: 'hideFooter',
+      name: 'showFooter',
       type: 'boolean',
       default: 'false',
-      description: 'Hide the footer with pagination controls.',
+      description: 'Render the footer with pagination controls.',
     },
     {
       name: 'hideSearch',
